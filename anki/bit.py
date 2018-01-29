@@ -33,3 +33,17 @@ def hamming_distance_int(x: int, y: int) -> int:
         diff &= diff - 1
 
     return count
+
+
+def hamming_weight(x: int) -> int:
+    """ Hamming weight is effectively Hamming distance between x and 0.
+    """
+    count = 0
+
+    while x != 0:
+        # increment the cound
+        count += 1
+        # clear the least significant bit
+        x &= x - 1
+
+    return count

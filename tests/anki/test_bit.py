@@ -14,3 +14,8 @@ class TestBitExercises(TestCase):
 
     def test_hamming_distance_int(self):
         self.assertEqual(2, hamming_distance_int(0b1011101, 0b1001001))
+
+    def test_others(self):
+        # Turn off the 3rd bit from the end
+        x = 0b1011101
+        self.assertEqual(0b1011001, x & ~(1 << 2))
