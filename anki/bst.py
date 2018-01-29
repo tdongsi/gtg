@@ -1,3 +1,5 @@
+""" Questions about binary search trees.
+"""
 
 class BinaryTreeNode:
     """ Standard binary search tree node.
