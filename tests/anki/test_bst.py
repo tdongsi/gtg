@@ -41,4 +41,16 @@ class TestBstExercises(TestCase):
         self._root = BinaryTreeNode(10, self._D, self._E)
         self.assertFalse(is_bst(self._root))
 
+    def test_get_height(self):
+        self.assertEqual(3, get_height(self._root))
+
+        # add more node into the tree
+        Cp = BinaryTreeNode(11)
+        self._C._left = Cp  # dirty quick way
+        self.assertTrue(is_bst(self._root))
+        self.assertEqual(4, get_height(self._root))
+
+    def test_next(self):
+        self.assertEqual(3, get_height(self._root))
+
     pass

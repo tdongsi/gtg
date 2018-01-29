@@ -58,3 +58,12 @@ def is_bst(root:BinaryTreeNode, min=INTEGER_MIN, max=INTEGER_MAX) -> bool:
         if root.right():
             check &= is_bst(root.right(), root.element(), max)
         return check
+
+
+def get_height(node:BinaryTreeNode) -> int:
+    """ Get the height in nodes of a BST
+    """
+    if node is None:
+        return 0
+    else:
+        return 1 + max(get_height(node.left()), get_height(node.right()))
