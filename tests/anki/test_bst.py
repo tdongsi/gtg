@@ -27,4 +27,18 @@ class TestBstExercises(TestCase):
         with self.assertRaises(ValueError, msg="Target not found") as context:
             find_node_iterative(self._root, 17)
 
+    def test_is_bst(self):
+        self.assertTrue(is_bst(self._root))
+
+        # Create a negative case of BST
+        self._A = BinaryTreeNode(2)
+        self._B = BinaryTreeNode(11)
+        self._C = BinaryTreeNode(12)
+
+        self._D = BinaryTreeNode(5, self._A, self._B)
+        self._E = BinaryTreeNode(15, self._C)
+
+        self._root = BinaryTreeNode(10, self._D, self._E)
+        self.assertFalse(is_bst(self._root))
+
     pass

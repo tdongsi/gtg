@@ -1,6 +1,10 @@
 """ Questions about binary search trees.
 """
 
+# Just for testing
+INTEGER_MIN = -2**32
+INTEGER_MAX = 2*32
+
 class BinaryTreeNode:
     """ Standard binary search tree node.
     """
@@ -41,3 +45,16 @@ def find_node_iterative(root: BinaryTreeNode, target) -> BinaryTreeNode:
         raise ValueError("Target not found")
     pass
 
+
+def is_bst(root:BinaryTreeNode, min=INTEGER_MIN, max=INTEGER_MAX) -> bool:
+    """ Check if a given tree is a Binary Search Tree.
+    """
+    if (root.element() >= max or root.element() <= min):
+        return False
+    else:
+        check = True
+        if root.left():
+            check &= is_bst(root.left(), min, root.element())
+        if root.right():
+            check &= is_bst(root.right(), root.element(), max)
+        return check
