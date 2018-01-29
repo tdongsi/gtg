@@ -47,3 +47,24 @@ def hamming_weight(x: int) -> int:
         x &= x - 1
 
     return count
+
+
+def add(a, b):
+    """ Add two integers using bit manipulation.
+    x + y = (x&y) << 1 + x^y
+    """
+    while a != 0:
+        a, b = (a & b) << 1, a ^ b
+        # print("{} {}".format(x, y))
+    return b
+
+
+def abs(a):
+    """ Get absolute value without branching.
+    For two's complement form:
+    absolute value of a negative number = toggle bits of the number and add 1 to the result.
+    """
+    # Mask will be all 1s (value=-1) for negative integers,
+    # all 0s (value=0) for positive integer.
+    mask = a >> 31
+    return a ^ mask - mask
