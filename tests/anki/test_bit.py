@@ -22,6 +22,13 @@ class TestBitExercises(TestCase):
         self.assertEqual(5, add(2, 3))
         self.assertEqual(6, add(3, 3))
 
+    def test_subtract(self):
+        self.assertEqual(5, subtract(5, 0))
+        # self.assertEqual(-5, subtract(0, 5))
+        self.assertEqual(0, subtract(0, 0))
+        self.assertEqual(1, subtract(3, 2))
+        self.assertEqual(0, subtract(3, 3))
+
     def test_others(self):
         # Turn off the 3rd bit from the end
         x = 0b1011101

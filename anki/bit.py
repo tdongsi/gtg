@@ -51,7 +51,7 @@ def hamming_weight(x: int) -> int:
 
 def add(a, b):
     """ Add two integers using bit manipulation.
-    x + y = (x&y) << 1 + x^y
+    x + y = x^y + (x&y) << 1
     """
     while a != 0:
         a, b = (a & b) << 1, a ^ b
@@ -59,8 +59,20 @@ def add(a, b):
     return b
 
 
+def subtract(a, b):
+    """ Sutract two integers using bit manipulation
+    x - y = x^y - (~x & y)<<1
+    """
+    # This does NOT work for negative result in Python
+    # Due to a number in Python is an unbounded bit sequence
+    assert a >= b
+    while b != 0:
+        a, b = a ^ b, (~a & b) << 1
+    return a
+
+
 def abs(a):
-    """ Get absolute value without branching.
+    """ Get absolute value of 32-bit integer without branching.
     For two's complement form:
     absolute value of a negative number = toggle bits of the number and add 1 to the result.
     """
