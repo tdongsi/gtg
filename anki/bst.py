@@ -91,7 +91,7 @@ def get_height(node:BinaryTreeNode) -> int:
         return 1 + max(get_height(node.left()), get_height(node.right()))
 
 
-def insert_node_iterative(root:BinaryTreeNode, target):
+def insert_node_iterative(root:BinaryTreeNode, target) -> BinaryTreeNode:
     """Using an iterative approach, insert a value into a BST: insert(node, int)"""
     temp = root
     while temp is not None:
@@ -113,3 +113,28 @@ def insert_node_iterative(root:BinaryTreeNode, target):
     # root is None: empty tree
     if root is None:
         return BinaryTreeNode(target)
+
+
+def insert_node_recursive(root:BinaryTreeNode, target) -> BinaryTreeNode:
+    """Using a recursive approach, insert a value into a BST: insert(node, int).
+    Return None if no new tree is created.
+    """
+    # TODO: better way?
+    if root is None:
+        return BinaryTreeNode(target)
+    else:
+        if root.element() == target:
+            raise ValueError("Value already exists")
+        elif root.element() < target:
+            if root.right() is None:
+                root.set_right(BinaryTreeNode(target))
+                return None
+            else:
+                insert_node_recursive(root.right(), target)
+        else:
+            if root.left() is None:
+                root.set_left(BinaryTreeNode(target))
+                return None
+            else:
+                insert_node_recursive(root.left(), target)
+    pass
