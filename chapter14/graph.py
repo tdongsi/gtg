@@ -83,10 +83,10 @@ class Graph:
             return len(self._incoming[v])
 
     def incident_edges(self, v, outgoing=True):
-        if outgoing:
-            return self._outgoing[v].values()
-        else:
-            return self._incoming[v].values()
+        """Return an *iteration* of incident edges"""
+        adj = self._outgoing if outgoing else self._incoming
+        for e in adj[v].values():
+            yield e
 
     def insert_vertex(self, x=None):
         v = Vertex(x)
