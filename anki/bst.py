@@ -24,6 +24,15 @@ class BinaryTreeNode:
     def right(self):
         return self._right
 
+    def set_left(self, left):
+        self._left = left
+
+    def set_right(self, right):
+        self._right = right
+
+    def __eq__(self, other):
+        return self._element == other._element and self._left == other._left and self._right == other._right
+
 
 def find_node_iterative(root: BinaryTreeNode, target) -> BinaryTreeNode:
     """ Using an iterative approach, write a function find_node(root, target) that returns the node with the given target value in a BST.
@@ -80,3 +89,27 @@ def get_height(node:BinaryTreeNode) -> int:
         return 0
     else:
         return 1 + max(get_height(node.left()), get_height(node.right()))
+
+
+def insert_node_iterative(root:BinaryTreeNode, target):
+    """Using an iterative approach, insert a value into a BST: insert(node, int)"""
+    temp = root
+    while temp is not None:
+        if temp.element() == target:
+            raise ValueError
+        elif temp.element() < target:
+            if temp.right() is None:
+                temp.set_right(BinaryTreeNode(target))
+                return root
+            else:
+                temp = temp.right()
+        else:
+            if temp.left() is None:
+                temp.set_left(BinaryTreeNode(target))
+                return root
+            else:
+                temp = temp.left()
+
+    # root is None: empty tree
+    if root is None:
+        return BinaryTreeNode(target)

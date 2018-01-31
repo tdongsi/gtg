@@ -55,7 +55,12 @@ class TestBstExercises(TestCase):
         self.assertTrue(is_bst(self._root))
         self.assertEqual(4, get_height(self._root))
 
-    def test_next(self):
-        self.assertEqual(3, get_height(self._root))
+    def test_insert_node_iterative(self):
+        root = None
+        new_root = insert_node_iterative(root, 10)
+        self.assertEqual(new_root, BinaryTreeNode(10))
+
+        new_root = insert_node_iterative(self._root, 17)
+        # TODO: print out
 
     pass
