@@ -46,6 +46,19 @@ def find_node_iterative(root: BinaryTreeNode, target) -> BinaryTreeNode:
     pass
 
 
+def find_node_recursive(root:BinaryTreeNode, target) -> BinaryTreeNode:
+    """ Using a recursive approach, write a function find_node(root, target) that returns the node with the given target value in a BST.
+    """
+    if root is None:
+        return None
+    elif root.element() == target:
+        return root
+    elif root.element() < target:
+        return find_node_recursive(root.right(), target)
+    else:
+        return find_node_recursive(root.left(), target)
+
+
 def is_bst(root:BinaryTreeNode, min=INTEGER_MIN, max=INTEGER_MAX) -> bool:
     """ Check if a given tree is a Binary Search Tree.
     """

@@ -27,6 +27,11 @@ class TestBstExercises(TestCase):
         with self.assertRaises(ValueError, msg="Target not found") as context:
             find_node_iterative(self._root, 17)
 
+    def test_find_node_recursive(self):
+        self.assertEqual(self._A, find_node_recursive(self._root, 2))
+        self.assertEqual(self._E, find_node_recursive(self._root, 15))
+        self.assertEqual(None, find_node_recursive(self._root, 17))
+
     def test_is_bst(self):
         self.assertTrue(is_bst(self._root))
 
