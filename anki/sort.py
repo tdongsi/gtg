@@ -57,3 +57,9 @@ def quicksort(mlist, lo=0, hi=None):
         quicksort(mlist, lo, p)
         quicksort(mlist, p+1, hi)
         return mlist
+
+
+def heap_sort(mlist):
+    import heapq
+    heapq.heapify(mlist)
+    return [heapq.heappop(mlist) for i in range(len(mlist))]

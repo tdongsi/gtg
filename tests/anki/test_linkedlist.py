@@ -18,4 +18,10 @@ class TestListExercises(TestCase):
         head = self.get_test_list()
         self.assertEqual(list(iterate_list(head)), [2,1,3,4,5])
 
-    
+    def test_reverse_list(self):
+        head = self.get_test_list()
+        expected = [2,1,3,4,5]
+        expected.reverse()
+        new_list = reverse_list(head)
+        self.assertEqual(list(iterate_list(new_list)), expected)
+

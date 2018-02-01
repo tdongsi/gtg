@@ -2,7 +2,7 @@
 import random
 import unittest
 
-from anki.sort import quicksort as do_sort
+from anki.sort import heap_sort as do_sort
 
 
 class TestSorting(unittest.TestCase):
