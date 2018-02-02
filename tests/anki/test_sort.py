@@ -4,6 +4,7 @@ import unittest
 
 from anki.sort import heap_sort as do_sort
 from anki.sort import binary_search
+from anki.sort import binary_search_iterative
 
 
 class TestSorting(unittest.TestCase):
@@ -38,3 +39,9 @@ class TestBinarySearch(unittest.TestCase):
         self.assertEqual(binary_search([], 1), -1)
         self.assertEqual(binary_search([1,2,3,4,5], 3), 2)
         self.assertEqual(binary_search([1,2,3,4,5], 6), -1)
+
+    def test_search_iterative(self):
+        self.assertEqual(binary_search_iterative(None, 1), -1)
+        self.assertEqual(binary_search_iterative([], 1), -1)
+        self.assertEqual(binary_search_iterative([1,2,3,4,5], 3), 2)
+        self.assertEqual(binary_search_iterative([1,2,3,4,5], 6), -1)

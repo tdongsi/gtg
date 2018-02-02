@@ -87,3 +87,21 @@ def binary_search(mlist, target):
         return -1
     else:
         return _bs(0, len(mlist))
+
+
+def binary_search_iterative(mlist, target):
+    if mlist is None:
+        return -1
+    else:
+        lo = 0
+        hi = len(mlist)
+        while lo < hi:
+            med = (lo+hi) // 2
+            if mlist[med] == target:
+                return med
+            elif mlist[med] < target:
+                lo = med+1
+            else:
+                hi = med
+
+        return -1
