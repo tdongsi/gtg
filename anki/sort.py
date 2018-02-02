@@ -63,3 +63,27 @@ def heap_sort(mlist):
     import heapq
     heapq.heapify(mlist)
     return [heapq.heappop(mlist) for i in range(len(mlist))]
+
+
+def binary_search(mlist, target):
+    def _bs(lo, hi):
+        if lo == hi:
+            return -1
+        if lo == hi-1:
+            if mlist[lo] == target:
+                return lo
+            else:
+                return -1
+
+        med = (lo+hi)//2
+        if mlist[med] == target:
+            return med
+        elif mlist[med] < target:
+            return _bs(med+1, hi)
+        else:
+            return _bs(lo, med)
+
+    if mlist is None:
+        return -1
+    else:
+        return _bs(0, len(mlist))

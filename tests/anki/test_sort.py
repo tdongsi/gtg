@@ -3,6 +3,7 @@ import random
 import unittest
 
 from anki.sort import heap_sort as do_sort
+from anki.sort import binary_search
 
 
 class TestSorting(unittest.TestCase):
@@ -28,3 +29,12 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(do_sort([2, 3, 1, 2, 2, 4, 3, 1]), [1, 1, 2, 2, 2, 3, 3, 4])
         self.assertEqual(do_sort([2, 1]), [1, 2])
         pass
+
+
+class TestBinarySearch(unittest.TestCase):
+
+    def test_search(self):
+        self.assertEqual(binary_search(None, 1), -1)
+        self.assertEqual(binary_search([], 1), -1)
+        self.assertEqual(binary_search([1,2,3,4,5], 3), 2)
+        self.assertEqual(binary_search([1,2,3,4,5], 6), -1)
