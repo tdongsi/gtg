@@ -42,5 +42,21 @@ def iterate_list(head:Node):
         cur = cur.get_next()
 
 
-def next_stuff():
-    pass
+def find_item(head:Node, target)->Node:
+    """Find item in the given linked list"""
+    cur = head
+    while cur is not None:
+        if cur.element() == target:
+            return cur
+        else:
+            cur = cur.get_next()
+    # Should be None here
+    return cur
+
+
+def appendleft(head:Node, item)->Node:
+    """ Insert an item at the head of linked list.
+    :return: The head of new list
+    """
+    nd = Node(item, head)
+    return nd

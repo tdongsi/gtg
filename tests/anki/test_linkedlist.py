@@ -25,3 +25,20 @@ class TestListExercises(TestCase):
         new_list = reverse_list(head)
         self.assertEqual(list(iterate_list(new_list)), expected)
 
+    def test_find_list(self):
+        head = self.get_test_list()
+        self.assertEqual(find_item(head, 2), head)
+        self.assertEqual(find_item(head, 5), self._five)
+        self.assertEqual(find_item(head, 0), None)
+        self.assertEqual(find_item(None, 0), None)
+
+    def test_appendleft(self):
+        head = self.get_test_list()
+        new_list = appendleft(head, 7)
+        self.assertEqual(list(iterate_list(new_list)), [7, 2, 1, 3, 4, 5])
+
+        new_list = appendleft(None, 8)
+        self.assertEqual(list(iterate_list(new_list)), [8])
+
+        new_list = appendleft(self._five, 9)
+        self.assertEqual(list(iterate_list(new_list)), [9, 5])
