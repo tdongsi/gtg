@@ -3,8 +3,7 @@ import random
 import unittest
 
 from anki.sort import heap_sort as do_sort
-from anki.sort import binary_search
-from anki.sort import binary_search_iterative
+import anki.sort
 
 
 class TestSorting(unittest.TestCase):
@@ -35,13 +34,38 @@ class TestSorting(unittest.TestCase):
 class TestBinarySearch(unittest.TestCase):
 
     def test_search(self):
-        self.assertEqual(binary_search(None, 1), -1)
-        self.assertEqual(binary_search([], 1), -1)
-        self.assertEqual(binary_search([1,2,3,4,5], 3), 2)
-        self.assertEqual(binary_search([1,2,3,4,5], 6), -1)
+        self.assertEqual(anki.sort.binary_search(None, 1), -1)
+        self.assertEqual(anki.sort.binary_search([], 1), -1)
+        self.assertEqual(anki.sort.binary_search([1,2,3,4,5], 3), 2)
+        self.assertEqual(anki.sort.binary_search([1,2,3,4,5], 6), -1)
 
     def test_search_iterative(self):
-        self.assertEqual(binary_search_iterative(None, 1), -1)
-        self.assertEqual(binary_search_iterative([], 1), -1)
-        self.assertEqual(binary_search_iterative([1,2,3,4,5], 3), 2)
-        self.assertEqual(binary_search_iterative([1,2,3,4,5], 6), -1)
+        self.assertEqual(anki.sort.binary_search_iterative(None, 1), -1)
+        self.assertEqual(anki.sort.binary_search_iterative([], 1), -1)
+        self.assertEqual(anki.sort.binary_search_iterative([1,2,3,4,5], 3), 2)
+        self.assertEqual(anki.sort.binary_search_iterative([1,2,3,4,5], 6), -1)
+
+    def test_search_repeated(self):
+        self.assertTrue(anki.sort.binary_search_iterative([1, 2, 2, 3, 4, 5, 6, 7], 2) in [1, 2])
+        self.assertTrue(anki.sort.binary_search_iterative([1, 1, 2, 2, 2, 3, 3, 4], 2) in [2, 3, 4])
+        self.assertTrue(anki.sort.search_start([2, 2], 2) in [0, 1])
+
+    def test_search_start(self):
+        self.assertEqual(anki.sort.search_start(None, 1), -1)
+        self.assertEqual(anki.sort.search_start([], 1), -1)
+        self.assertEqual(anki.sort.search_start([1, 2, 3, 4, 5], 3), 2)
+        self.assertEqual(anki.sort.search_start([1, 2, 3, 4, 5], 6), -1)
+
+        self.assertEqual(anki.sort.search_start([1, 2, 2, 3, 4, 5, 6, 7], 2), 1)
+        self.assertEqual(anki.sort.search_start([1, 1, 2, 2, 2, 3, 3, 4], 2), 2)
+        self.assertEqual(anki.sort.search_start([2, 2], 2), 0)
+
+    def test_search_end(self):
+        self.assertEqual(anki.sort.search_end(None, 1), -1)
+        self.assertEqual(anki.sort.search_end([], 1), -1)
+        self.assertEqual(anki.sort.search_end([1, 2, 3, 4, 5], 3), 2)
+        self.assertEqual(anki.sort.search_end([1, 2, 3, 4, 5], 6), -1)
+
+        self.assertEqual(anki.sort.search_end([1, 2, 2, 3, 4, 5, 6, 7], 2), 2)
+        self.assertEqual(anki.sort.search_end([1, 1, 2, 2, 2, 3, 3, 4], 2), 4)
+        self.assertEqual(anki.sort.search_end([2, 2], 2), 1)
