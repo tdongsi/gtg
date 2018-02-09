@@ -69,3 +69,8 @@ class TestBinarySearch(unittest.TestCase):
         self.assertEqual(anki.sort.search_end([1, 2, 2, 3, 4, 5, 6, 7], 2), 2)
         self.assertEqual(anki.sort.search_end([1, 1, 2, 2, 2, 3, 3, 4], 2), 4)
         self.assertEqual(anki.sort.search_end([2, 2], 2), 1)
+
+    def test_random(self):
+        from collections import Counter
+        cnt = Counter("abbc")
+        print([k for k, v in cnt.items() if v == 1])
