@@ -68,7 +68,7 @@ def find_min(root:BinaryTreeNode) -> int:
             return curr.element()
 
 
-def find_sucessor(root: BinaryTreeNode, target) -> int:
+def find_successor(root: BinaryTreeNode, target) -> int:
     """Get the successor of a value in a BST rooted by given node. Returns int."""
     if root is None:
         return None

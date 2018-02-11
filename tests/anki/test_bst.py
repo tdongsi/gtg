@@ -21,19 +21,19 @@ class TestBstExercises(TestCase):
 
     def test_find_successor(self):
         # Empty tree
-        self.assertEqual(None, find_sucessor(None, 2))
+        self.assertEqual(None, find_successor(None, 2))
 
         # Singleton tree
-        self.assertEqual(None, find_sucessor(self._A, 2))
-        self.assertEqual(None, find_sucessor(self._A, 5))
+        self.assertEqual(None, find_successor(self._A, 2))
+        self.assertEqual(None, find_successor(self._A, 5))
 
         # Value not found
-        self.assertEqual(None, find_sucessor(self._root, 3))
-        self.assertEqual(None, find_sucessor(self._root, 15))
+        self.assertEqual(None, find_successor(self._root, 3))
+        self.assertEqual(None, find_successor(self._root, 15))
 
-        self.assertEqual(5, find_sucessor(self._root, 2))
-        self.assertEqual(7, find_sucessor(self._root, 5))
-        self.assertEqual(10, find_sucessor(self._root, 7))
+        self.assertEqual(5, find_successor(self._root, 2))
+        self.assertEqual(7, find_successor(self._root, 5))
+        self.assertEqual(10, find_successor(self._root, 7))
 
     def test_find_min(self):
         self.assertEqual(None, find_min(None))
