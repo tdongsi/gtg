@@ -77,12 +77,32 @@ class TestBstExercises(TestCase):
         self.assertTrue(is_bst(self._root))
         self.assertEqual(4, get_height(self._root))
 
+    def test_print_bst(self):
+        print_bst(self._root)
+
     def test_insert_node_iterative(self):
         root = None
         new_root = insert_node_iterative(root, 10)
         self.assertEqual(new_root, BinaryTreeNode(10))
 
         new_root = insert_node_iterative(self._root, 17)
-        # TODO: print out
+        print_bst(new_root)
+
+    def test_delete_node(self):
+        root = None
+        self.assertEqual(None, delete_node(root, 10))
+
+        # insert and delete
+        new_root = insert_node_iterative(root, 10)
+        self.assertEqual(new_root, BinaryTreeNode(10))
+        check = delete_node(new_root, 10)
+        self.assertEqual(check, root)
+
+        # Before
+        print("Before")
+        print_bst(self._root)
+        new_bst = delete_node(self._root, 5)
+        print("After")
+        print_bst(new_bst)
 
     pass

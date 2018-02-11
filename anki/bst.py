@@ -30,6 +30,9 @@ class BinaryTreeNode:
     def set_right(self, right):
         self._right = right
 
+    def set_value(self, val):
+        self._element = val
+
     def __eq__(self, other):
         return self._element == other._element and self._left == other._left and self._right == other._right
 
@@ -169,3 +172,46 @@ def insert_node_recursive(root:BinaryTreeNode, target) -> BinaryTreeNode:
         else:
             root.set_left(insert_node_recursive(root.left(), target))
             return root
+
+
+def delete_node(root:BinaryTreeNode, target) -> BinaryTreeNode:
+    """Delete a given value from a BST rooted at given node."""
+    if root is None:
+        return
+    elif root.element() > target:
+        new_left = delete_node(root.left(), target)
+        root.set_left(new_left)
+        return root
+    elif root.element() < target:
+        new_right = delete_node(root.right(), target)
+        root.set_right(new_right)
+        return root
+    else:
+        # root.element() == target
+        if root.left() is None and root.right() is None:
+            # del root or let garbage collector delete the node
+            return None
+        elif root.left() is None:
+            return root.right()
+        elif root.right() is None:
+            return root.left()
+        else:
+            right_min = find_min(root.right())
+            root.set_value(right_min)
+            delete_node(root.right(), right_min)
+            return root
+
+
+def print_bst(root:BinaryTreeNode, depth=1):
+    """Print Binary Seach Tree"""
+
+    INDENT = "  "
+
+    if root:
+        print_bst(root.right(), depth+1)
+
+        line = INDENT * depth
+        line += str(root.element())
+        print(line)
+
+        print_bst(root.left(), depth+1)
