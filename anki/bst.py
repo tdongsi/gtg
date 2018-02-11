@@ -156,9 +156,7 @@ def insert_node_iterative(root:BinaryTreeNode, target) -> BinaryTreeNode:
 
 
 def insert_node_recursive(root:BinaryTreeNode, target) -> BinaryTreeNode:
-    """Using a recursive approach, insert a value into a BST: insert(node, int).
-    Return None if no new tree is created.
-    """
+    """Using a recursive approach, insert a value into a BST: insert(node, int)."""
     # TODO: better way?
     if root is None:
         return BinaryTreeNode(target)
@@ -166,15 +164,8 @@ def insert_node_recursive(root:BinaryTreeNode, target) -> BinaryTreeNode:
         if root.element() == target:
             raise ValueError("Value already exists")
         elif root.element() < target:
-            if root.right() is None:
-                root.set_right(BinaryTreeNode(target))
-                return None
-            else:
-                insert_node_recursive(root.right(), target)
+            root.set_right(insert_node_recursive(root.right(), target))
+            return root
         else:
-            if root.left() is None:
-                root.set_left(BinaryTreeNode(target))
-                return None
-            else:
-                insert_node_recursive(root.left(), target)
-    pass
+            root.set_left(insert_node_recursive(root.left(), target))
+            return root

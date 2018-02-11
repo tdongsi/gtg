@@ -83,10 +83,10 @@ def binary_search(mlist, target):
         else:
             return _bs(lo, mid)
 
-    if mlist is None:
-        return -1
-    else:
+    if mlist:
         return _bs(0, len(mlist))
+    else:
+        return -1
 
 
 def binary_search_iterative(mlist, target):
