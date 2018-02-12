@@ -198,7 +198,8 @@ def delete_node(root:BinaryTreeNode, target) -> BinaryTreeNode:
         else:
             right_min = find_min(root.right())
             root.set_value(right_min)
-            delete_node(root.right(), right_min)
+            new_right = delete_node(root.right(), right_min)
+            root.set_right(new_right)
             return root
 
 

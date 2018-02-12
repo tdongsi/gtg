@@ -98,10 +98,23 @@ class TestBstExercises(TestCase):
         check = delete_node(new_root, 10)
         self.assertEqual(check, root)
 
-        # Before
         print("Before")
         print_bst(self._root)
         new_bst = delete_node(self._root, 5)
+        print("After")
+        print_bst(new_bst)
+
+    def test_delete_node_12(self):
+        print("Before")
+        print_bst(self._root)
+        new_bst = delete_node(self._root, 12)
+        print("After")
+        print_bst(new_bst)
+
+    def test_delete_node_10(self):
+        print("Before")
+        print_bst(self._root)
+        new_bst = delete_node(self._root, 10)
         print("After")
         print_bst(new_bst)
 
