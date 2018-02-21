@@ -63,4 +63,7 @@ class Box():
 
         return sum
 
+    @staticmethod
+    def complex_string(mstr):
+        """Evaluate complex expression. Example: "5+16-((9-6)-(4-2))"""
         return 0
