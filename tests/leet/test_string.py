@@ -30,4 +30,6 @@ class TestBox(TestCase):
         self.assertEqual(Box.complex_string("-5+6"), 1)
 
         self.assertEqual(Box.complex_string("5+16-((9-6)-(4-2))"), 20)
-        self.assertEqual(Box.complex_string("22+(2-4)"))
+        self.assertEqual(Box.complex_string("22+(2-4)"), 20)
+        self.assertEqual(Box.complex_string("(2-4)"), -2)
+        self.assertEqual(Box.complex_string("(4)"), 4)

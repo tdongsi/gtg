@@ -66,4 +66,26 @@ class Box():
     @staticmethod
     def complex_string(mstr):
         """Evaluate complex expression. Example: "5+16-((9-6)-(4-2))"""
-        return 0
+        stack = []
+        try:
+            start = mstr.index("(")
+        except ValueError:
+            return Box.simple_string_serious(mstr)
+
+        for char in mstr[start:]:
+            # print(stack)
+            if char == ")":
+                exp = []
+                a = stack.pop()
+                while a != "(":
+                    exp.append(a)
+                    a = stack.pop()
+
+                # evaluate exp and push back
+                exp_str = ''.join(reversed(exp))
+                # print(exp_str)
+                stack.append(str(Box.simple_string_serious(exp_str)))
+            else:
+                stack.append(char)
+
+        return Box.simple_string_serious(mstr[0:start] + ''.join(stack))
