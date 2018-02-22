@@ -69,22 +69,22 @@ def counting_sort(mlist, k=None, key=None):
     """Counting sort
 
     :param mlist: List of items.
-    :param k: Maximum range of key
+    :param k: Maximum range of key [0,k)
     :param key: function to get key of item. (for radix sort)
     :return:
     """
     if k is None:
-        k = max(mlist)
+        k = max(mlist) + 1
 
     if key is None:
         key = lambda x: x
 
-    counter = [[] for i in range(k+1)]
+    counter = [[] for i in range(k)]
     for i in range(len(mlist)):
         counter[key(mlist[i])].append(mlist[i])
 
     output = []
-    for i in range(k+1):
+    for i in range(k):
         output.extend(counter[i])
     return output
 
