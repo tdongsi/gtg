@@ -89,6 +89,29 @@ def counting_sort(mlist, k=None, key=None):
     return output
 
 
+def radix_sort(mlist, w=None):
+    RADIX = 10
+
+    if w is None:
+        temp = max(mlist)
+        w = 0
+        while temp > 0:
+            w += 1
+            temp //= RADIX
+
+    output = mlist
+    for digit in range(w):
+        def my_key(num):
+            for _ in range(digit):
+                num //= RADIX
+            return num % RADIX
+
+        output = counting_sort(output, RADIX, my_key)
+        # print(output)
+
+    return output
+
+
 def binary_search(mlist, target):
     def _bs(lo, hi):
         if lo == hi:

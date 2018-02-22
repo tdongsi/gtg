@@ -2,7 +2,7 @@
 import random
 import unittest
 
-from anki.sort import counting_sort as do_sort
+from anki.sort import radix_sort as do_sort
 import anki.sort
 
 
@@ -29,6 +29,9 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(do_sort([2, 3, 1, 2, 2, 4, 3, 1]), [1, 1, 2, 2, 2, 3, 3, 4])
         self.assertEqual(do_sort([2, 1]), [1, 2])
         pass
+
+    def test_large_range(self):
+        self.assertEqual(do_sort([170, 45, 75, 90, 802, 24, 2, 66]), [2, 24, 45, 66, 75, 90, 170, 802])
 
 
 class TestBinarySearch(unittest.TestCase):
