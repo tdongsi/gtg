@@ -28,6 +28,11 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(do_sort([1, 2, 1]), [1, 1, 2])
         self.assertEqual(do_sort([2, 3, 1, 2, 2, 4, 3, 1]), [1, 1, 2, 2, 2, 3, 3, 4])
         self.assertEqual(do_sort([2, 1]), [1, 2])
+
+        # Corner cases
+        self.assertEqual(do_sort([1]), [1])
+        self.assertEqual(do_sort([]), [])
+        self.assertEqual(do_sort(None), None)
         pass
 
     def test_large_range(self):

@@ -92,6 +92,9 @@ def counting_sort(mlist, k=None, key=None):
 def radix_sort(mlist, w=None):
     RADIX = 10
 
+    if not mlist:
+        return mlist
+
     if w is None:
         temp = max(mlist)
         w = 0
