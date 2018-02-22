@@ -20,7 +20,7 @@ def merge_sort(mlist):
 
         return alist
 
-    if len(mlist) <= 1:
+    if not mlist or len(mlist) <= 1:
         return mlist
     else:
         med = len(mlist)//2
@@ -43,6 +43,9 @@ def quicksort(mlist, lo=0, hi=None):
         alist[idx], alist[hi - 1] = alist[hi - 1], alist[idx]
         return idx
 
+    if not mlist:
+        return mlist
+
     if hi is None:
         hi = len(mlist)
 
@@ -60,6 +63,9 @@ def quicksort(mlist, lo=0, hi=None):
 
 
 def heap_sort(mlist):
+    if mlist is None:
+        return None
+
     import heapq
     heapq.heapify(mlist)
     return [heapq.heappop(mlist) for i in range(len(mlist))]
@@ -73,6 +79,9 @@ def counting_sort(mlist, k=None, key=None):
     :param key: function to get key of item. (for radix sort)
     :return:
     """
+    if not mlist:
+        return mlist
+
     if k is None:
         k = max(mlist) + 1
 
