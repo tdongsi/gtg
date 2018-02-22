@@ -124,6 +124,23 @@ def radix_sort(mlist, w=None):
     return output
 
 
+def selection_sort(mlist):
+
+    if not mlist:
+        return mlist
+
+    for i in range(0, len(mlist)-1):
+        iMin = i
+        for j in range(i+1, len(mlist)):
+            if mlist[j] < mlist[iMin]:
+                iMin = j
+
+        if iMin != i:
+            mlist[iMin], mlist[i] = mlist[i], mlist[iMin]
+
+    return mlist
+
+
 def binary_search(mlist, target):
     def _bs(lo, hi):
         if lo == hi:
