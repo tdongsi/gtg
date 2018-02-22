@@ -65,6 +65,30 @@ def heap_sort(mlist):
     return [heapq.heappop(mlist) for i in range(len(mlist))]
 
 
+def counting_sort(mlist, k=None, key=None):
+    """Counting sort
+
+    :param mlist: List of items.
+    :param k: Maximum range of key
+    :param key: function to get key of item. (for radix sort)
+    :return:
+    """
+    if k is None:
+        k = max(mlist)
+
+    if key is None:
+        key = lambda x: x
+
+    counter = [[] for i in range(k+1)]
+    for i in range(len(mlist)):
+        counter[key(mlist[i])].append(mlist[i])
+
+    output = []
+    for i in range(k+1):
+        output.extend(counter[i])
+    return output
+
+
 def binary_search(mlist, target):
     def _bs(lo, hi):
         if lo == hi:
