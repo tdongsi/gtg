@@ -100,3 +100,65 @@ class Graph:
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
         return e
+
+class ExampleGraphs:
+
+    @staticmethod
+    def airport_graph():
+        """ Example airport graph shown in Figure 14.8, page 640
+
+        :return:
+        """
+        g = Graph(directed=True)
+
+        bos = Vertex("BOS")
+        jfk = Vertex("JFK")
+        dfw = Vertex("DFW")
+        lax = Vertex("LAX")
+        ord = Vertex("ORD")
+        mia = Vertex("MIA")
+        sfo = Vertex("SFO")
+
+        return g
+
+
+def DFS(g:Graph, u:Vertex, discovered):
+    """ DFS traversal of the undiscovered portion of Graph g starting at Vertex u.
+    Example: start DFS traversal with DFS(g, u, {u: None}).
+
+    :param g: given Graph
+    :param u: starting Vertex
+    :param discovered: Mapping each vertex to the edge used to discover it.
+    :return:
+    """
+    for e in g.incident_edges(u):
+        v = e.opposite(u)
+        if v not in discovered:
+            discovered[v] = e
+            DFS(g, v, discovered)
+
+
+def construct_path(u:Vertex, v:Vertex, discovered):
+    """ Construct a path from u to v.
+
+    :param u: source Vertex
+    :param v: destination Vertex
+    :param discovered: discovery edges constructed from DFS
+    :return: list of vertices from u to v
+    """
+    path = []
+
+    if v in discovered:
+        path.append(v)
+
+        walk = v
+        while walk is not u:
+            e = discovered[walk]
+            parent = e.opposite(walk)
+            path.append(parent)
+            walk = parent
+
+        path.reverse()
+
+    return path
+
