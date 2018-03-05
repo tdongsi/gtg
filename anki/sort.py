@@ -89,12 +89,12 @@ def counting_sort(mlist, k=None, key=None):
         key = lambda x: x
 
     counter = [[] for i in range(k)]
-    for i in range(len(mlist)):
-        counter[key(mlist[i])].append(mlist[i])
+    for e in mlist:
+        counter[key(e)].append(e)
 
     output = []
-    for i in range(k):
-        output.extend(counter[i])
+    for section in counter:
+        output.extend(section)
     return output
 
 

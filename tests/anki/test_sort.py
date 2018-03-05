@@ -2,7 +2,7 @@
 import random
 import unittest
 
-from anki.sort import selection_sort as do_sort
+from anki.sort import counting_sort as do_sort
 import anki.sort
 
 
