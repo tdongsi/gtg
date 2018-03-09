@@ -162,3 +162,26 @@ def construct_path(u:Vertex, v:Vertex, discovered):
 
     return path
 
+
+def BFS(g:Graph, s:Vertex, discovered):
+    """ BFS traversal of the undiscovered portion of Graph g starting at vertex s.
+
+    :param g: give Graph
+    :param s: starting Vertex
+    :param discovered: Mapping each vertex to the edge used to discover it.
+    :return:
+    """
+    level = [s]
+
+    while len(level) > 0:
+        next_level = []
+        for v in level:
+            for e in g.incident_edges(v):
+                u = e.opposite(v)
+                if u not in discovered:
+                    discovered[u] = e
+                    next_level.append(u)
+
+        level = next_level
+
+
