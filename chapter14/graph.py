@@ -105,19 +105,38 @@ class ExampleGraphs:
 
     @staticmethod
     def airport_graph():
-        """ Example airport graph shown in Figure 14.8, page 640
+        """ Example airport graph shown in Figure 14.14, page 659
 
         :return:
         """
-        g = Graph(directed=True)
+        g = Graph(directed=False)
 
-        bos = Vertex("BOS")
-        jfk = Vertex("JFK")
-        dfw = Vertex("DFW")
-        lax = Vertex("LAX")
-        ord = Vertex("ORD")
-        mia = Vertex("MIA")
-        sfo = Vertex("SFO")
+        bos = g.insert_vertex("BOS")
+        jfk = g.insert_vertex("JFK")
+        dfw = g.insert_vertex("DFW")
+        lax = g.insert_vertex("LAX")
+        ord = g.insert_vertex("ORD")
+        mia = g.insert_vertex("MIA")
+        sfo = g.insert_vertex("SFO")
+
+        g.insert_edge(bos, jfk, 187)
+        g.insert_edge(bos, sfo, 2704)
+        g.insert_edge(bos, ord, 867)
+        g.insert_edge(bos, mia, 1258)
+
+        g.insert_edge(jfk, ord, 740)
+        g.insert_edge(jfk, mia, 1090)
+
+        g.insert_edge(mia, lax, 2342)
+        g.insert_edge(mia, dfw, 1121)
+
+        g.insert_edge(dfw, lax, 1235)
+        g.insert_edge(dfw, sfo, 1464)
+        g.insert_edge(dfw, ord, 802)
+
+        g.insert_edge(ord, sfo, 1846)
+
+        g.insert_edge(sfo, lax, 337)
 
         return g
 
