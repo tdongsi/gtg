@@ -228,3 +228,31 @@ def floyd_warshall(g:Graph) -> Graph:
 
     return closure
 
+
+def topological_sort(g: Graph) -> list:
+    """ Return a list of vertices of DAG in topological order
+
+    :param g: a directed acyclic graph (DAG)
+    :return: list of topological sort
+    """
+    topo = []
+    ready = []
+    incount = {}
+
+    for u in g.vertices():
+        incount[u] = g.degree(u, False)
+        if incount[u] == 0:
+            # u is free of constraints
+            ready.append(u)
+
+    while len(ready) > 0:
+        u = ready.pop()
+        topo.append(u)
+
+        for e in g.incident_edges(u):
+            v = e.opposite(u)
+            incount[v] -= 1
+            if incount[v] == 0:
+                ready.append(v)
+
+    return topo
