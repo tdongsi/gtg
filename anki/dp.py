@@ -7,7 +7,7 @@ def longest_common_subsequence(str1:str, str2:str) -> str:
     return ""
 
 
-def subset_sum(values:list, total:int) -> bool:
+def subset_sum(values:set, total:int) -> bool:
     """ Given an array of non-negative numbers and a total, is there a way to add up those numbers to the total.
 
     :param values: array of non-negative numbers
