@@ -12,7 +12,7 @@ def longest_common_subsequence_length(str1:str, str2:str) -> int:
             if str1[i-1] == str2[j-1]:
                 mtable[i][j] = 1 + mtable[i-1][j-1]
             else:
-                mtable[i][j] = max(mtable[i-1][j], mtable[i-1][j-1], mtable[i][j-1])
+                mtable[i][j] = max(mtable[i-1][j], mtable[i][j-1])
 
     return mtable[m][n]
 
@@ -30,9 +30,31 @@ def longest_common_subsequence(str1:str, str2:str) -> str:
             if str1[i-1] == str2[j-1]:
                 mtable[i][j] = 1 + mtable[i-1][j-1]
             else:
-                mtable[i][j] = max(mtable[i-1][j], mtable[i-1][j-1], mtable[i][j-1])
+                mtable[i][j] = max(mtable[i-1][j], mtable[i][j-1])
 
-    return mtable[m][n]
+    # return mtable[m][n]
+    # We have longest_common_subsequence_length at this point
+
+    subsequence = [""] * mtable[m][n]
+    idx = mtable[m][n] - 1
+
+    i = m
+    j = n
+    while i > 0 and j > 0:
+        if str1[i-1] == str2[j-1]:
+            # if character matches, add to the array
+            subsequence[idx] = str2[j - 1]
+            i -= 1
+            j -= 1
+            idx -= 1
+        else:
+            # else, follow the larger number
+            if mtable[i-1][j] > mtable[i][j-1]:
+                i -= 1
+            else:
+                j -= 1
+
+    return "".join(subsequence)
 
 
 def subset_sum(values: list, total: int) -> bool:
