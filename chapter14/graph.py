@@ -14,6 +14,9 @@ class Vertex:
     def __hash__(self):
         return hash(id(self))
 
+    def __str__(self):
+        return "[Vertex: %s]" % self._element
+
 
 class Edge:
     """Lightweight edge structure for graph"""
@@ -40,6 +43,9 @@ class Edge:
 
     def __hash__(self):
         return hash((self._src, self._des))
+
+    def __str__(self):
+        return "%s >- %s -> %s" % (self._src, self._element, self._des)
 
 
 class Graph:
@@ -101,6 +107,7 @@ class Graph:
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
         return e
+
 
 class ExampleGraphs:
 
@@ -203,6 +210,34 @@ def BFS(g:Graph, s:Vertex, discovered):
                     next_level.append(u)
 
         level = next_level
+
+
+def is_bipartite(g:Graph, s:Vertex):
+    """ Check if a graph is bipartite.
+
+    :param g: give Graph
+    :param s: starting Vertex
+    :return: True if bipartite.
+    """
+    # Perform a BFS traversal and keep track of color
+    level = [s]
+    coloring = {s: 0}  # keep track of colors for each node
+
+    while len(level) > 0:
+        next_level = []
+        for v in level:
+            for e in g.incident_edges(v):
+                u = e.opposite(v)
+                if u not in coloring:
+                    coloring[u] = 1 - coloring[v]
+                    next_level.append(u)
+                else:
+                    if coloring[u] == coloring[v]:
+                        return False
+
+        level = next_level
+
+    return True
 
 
 def floyd_warshall(g:Graph) -> Graph:

@@ -18,3 +18,4 @@ class TestDpExcercises(unittest.TestCase):
     def test_longest_common_subsequence(self):
         self.assertEqual("ADH", dp.longest_common_subsequence("ABCDGH", "AEDFHR"))
         self.assertEqual("GTAB", dp.longest_common_subsequence("AGGTAB", "GXTXAYB"))
+        self.assertEqual("MJAU", dp.longest_common_subsequence("XMJYAUZ", "MZJAWXU"))
