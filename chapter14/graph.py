@@ -220,22 +220,21 @@ def is_bipartite(g:Graph, s:Vertex):
     :return: True if bipartite.
     """
     # Perform a BFS traversal and keep track of color
-    level = [s]
+    from collections import deque
+    to_visit = deque([s])
     coloring = {s: 0}  # keep track of colors for each node
 
-    while len(level) > 0:
-        next_level = []
-        for v in level:
-            for e in g.incident_edges(v):
-                u = e.opposite(v)
-                if u not in coloring:
-                    coloring[u] = 1 - coloring[v]
-                    next_level.append(u)
-                else:
-                    if coloring[u] == coloring[v]:
-                        return False
+    while to_visit:
+        v = to_visit.popleft()
 
-        level = next_level
+        for e in g.incident_edges(v):
+            u = e.opposite(v)
+            if u not in coloring:
+                coloring[u] = 1 - coloring[v]
+                to_visit.append(u)
+            else:
+                if coloring[u] == coloring[v]:
+                    return False
 
     return True
 
@@ -366,3 +365,24 @@ def shortest_path_lengths(g:Graph, s:Vertex):
 
     return cloud
 
+
+def shortest_path_tree(g: Graph, s: Vertex, d:dict) -> dict:
+    """ Reconstruct shortest-path tree rooted at vertex s, given the distance map d.
+    Return tree as a map from vertex v -> discovery edge.
+
+    :param g: Given graph, directed or undirected.
+    :param s: starting vertex.
+    :param d: distance map, created from Dijkstra's algorithm.
+    :return:
+    """
+    tree = {}
+
+    for v in d:
+        if v is not s:
+            for e in g.incident_edges(v, False):
+                u = e.opposite(v)
+                wgt = e.element()
+                if d[v] == d[u] + wgt:
+                    tree[v] = e
+
+    return tree

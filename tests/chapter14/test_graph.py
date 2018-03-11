@@ -9,12 +9,16 @@ class TestGraph(unittest.TestCase):
     def test_dijkstra_algorithm(self):
         g = ExampleGraphs.airport_graph()
 
-        starting_vertex = None
-        for v in g.vertices():
-            if v.element() == "JFK":
-                starting_vertex = v
+        vertex_map = {v.element() : v for v in g.vertices()}
+        starting_vertex = vertex_map["JFK"]
 
         cloud = shortest_path_lengths(g, starting_vertex)
 
         for k, v in cloud.items():
             print("%s: %s"% (k,v))
+
+        sp_tree = shortest_path_tree(g, starting_vertex, cloud)
+        path = construct_path(vertex_map["JFK"], vertex_map["LAX"], sp_tree)
+
+        for ap in path:
+            print(str(ap))
