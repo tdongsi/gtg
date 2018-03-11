@@ -291,3 +291,78 @@ def topological_sort(g: Graph) -> list:
                 ready.append(v)
 
     return topo
+
+
+class AdaptableUnsortedPriorityQueue():
+    """ Mocking AdaptableHeapPriorityQueue.
+    loc => key in internal map
+    key, val => value in internal map
+    """
+
+    def __init__(self):
+        self._map = {}
+
+    def add(self, key, value):
+        """Add a key-value pair."""
+        self._map[value] = (key, value)
+        return value
+
+    def update(self, loc, newkey, newval):
+        """Update the key and value for the entry"""
+        self._map[loc] = (newkey, newval)
+
+    def is_empty(self):
+        return (len(self._map) == 0)
+
+    def remove_min(self):
+
+        min_key = float('inf')
+        min_loc = None
+        min_return = None
+
+        for loc, val in self._map.items():
+            if val[0] < min_key:
+                min_key = val[0]
+                min_loc = loc
+                min_return = val
+
+        del self._map[min_loc]
+        return min_return
+
+
+def shortest_path_lengths(g:Graph, s:Vertex):
+    """ Compute shortest-path distances from src to reachable vertices of g.
+    Dijkstra's Algorithm for finding shortest paths.
+
+    :param g: directed or undirected Graph. e.element() must return non-negative weight
+    :param s: Starting vertex
+    :return: dictionary mapping each reachable vertex to its distance from s.
+    """
+
+    d = {}      # d[v] is upper bound from s to v
+    cloud = {}  # map reachable v to its d[v] value
+    pq = AdaptableUnsortedPriorityQueue()   # vertex v will have key d[v]
+    pqlocator = {}      # map from vertex to its pq locator
+
+    for v in g.vertices():
+        if v is s:
+            d[v] = 0
+        else:
+            d[v] = float('inf')
+
+        pqlocator[v] = pq.add(d[v], v)
+
+    while not pq.is_empty():
+        key, u = pq.remove_min()
+        cloud[u] = key
+
+        for e in g.incident_edges(u):
+            v = e.opposite(u)
+            if v not in cloud:
+                wgt = e.element()
+                if d[u] + wgt < d[v]:
+                    d[v] = d[u] + wgt
+                    pq.update(pqlocator[v], d[v], v)
+
+    return cloud
+
