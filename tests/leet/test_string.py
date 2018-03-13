@@ -40,4 +40,7 @@ class TestGoogle(TestCase):
 
     def test_word_puzzle(self):
         Google.RESOURCE_FOLDER = os.getcwd() + "/resources"
-        Google.word_puzzle("mold", "etch")
+        # self.assertEqual(['mold', 'mole', 'male', 'mace', 'mach', 'each', 'etch'], Google.word_puzzle("mold", "etch"))
+        # print(Google.word_puzzle("accent", "sprint"))
+        # print(Google.word_puzzle("hello", "class"))
+        print(Google.word_puzzle("damp", "like"))

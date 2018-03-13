@@ -96,18 +96,79 @@ class Google():
     RESOURCE_FOLDER = "leet/resources"
 
     @staticmethod
+    def is_adjacent(word1, word2):
+        count = 0
+        for a, b in zip(word1, word2):
+            if a != b:
+                count += 1
+            if count > 1:
+                return False
+
+        if count == 1:
+            return True
+
+    @staticmethod
+    def adjacent_words(dict, word):
+        adj = []
+
+        for w in dict:
+            if Google.is_adjacent(w, word):
+                adj.append(w)
+
+        return adj
+
+    @staticmethod
     def word_puzzle(start: str, end: str):
         """Solve puzzle: from a source word, modify one character in each step such that
         the new word is valid in order to get to destination word.
         """
 
+        from collections import deque
+
+        if len(start) != len(end):
+            return None
+
+        # Dictionary of same length words
+        mydict = []
+
         try:
             with open(Google.RESOURCE_FOLDER + "/words.txt") as words:
                 count = 0
                 for word in words:
-                    print(word)
-                    count += 1
-                    if count == 10:
-                        break
+                    if len(word.strip()) == len(start):
+                        mydict.append(word.strip())
         except IOError:
             print("Error opening dictionary")
+
+        # This is basically a BFS traversal
+        to_visit = deque([start])
+        discovered = {start: None}
+
+        while to_visit:
+            v = to_visit.popleft()
+            breakFlag = False
+
+            for w in Google.adjacent_words(mydict, v):
+                if w not in discovered:
+                    discovered[w] = (v, w)
+                    to_visit.append(w)
+
+                if w == end:
+                    breakFlag = True
+                    break
+
+            if breakFlag:
+                break
+
+        if end not in discovered:
+            return None
+        else:
+            path = [end]
+            walk = end
+            while walk != start:
+                parent = discovered[walk][0]
+                path.append(parent)
+                walk = parent
+
+            path.reverse()
+            return path
