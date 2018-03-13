@@ -129,16 +129,7 @@ class Google():
             return None
 
         # Dictionary of same length words
-        mydict = []
-
-        try:
-            with open(Google.RESOURCE_FOLDER + "/words.txt") as words:
-                count = 0
-                for word in words:
-                    if len(word.strip()) == len(start):
-                        mydict.append(word.strip())
-        except IOError:
-            print("Error opening dictionary")
+        mydict = Google.filter_dict(len(start))
 
         # This is basically a BFS traversal
         to_visit = deque([start])
@@ -172,3 +163,17 @@ class Google():
 
             path.reverse()
             return path
+
+    @staticmethod
+    def filter_dict(length):
+        mydict = []
+        try:
+            with open(Google.RESOURCE_FOLDER + "/words.txt") as words:
+                count = 0
+                for word in words:
+                    if len(word.strip()) == length:
+                        mydict.append(word.strip())
+        except IOError:
+            print("Error opening dictionary")
+
+        return mydict
