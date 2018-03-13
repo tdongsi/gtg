@@ -91,7 +91,7 @@ class Box():
         return Box.simple_string_serious(mstr[0:start] + ''.join(stack))
 
 
-class Google():
+class GoogleWordPuzzle():
 
     RESOURCE_FOLDER = "leet/resources"
 
@@ -112,7 +112,7 @@ class Google():
         adj = []
 
         for w in dict:
-            if Google.is_adjacent(w, word):
+            if GoogleWordPuzzle.is_adjacent(w, word):
                 adj.append(w)
 
         return adj
@@ -129,7 +129,7 @@ class Google():
             return None
 
         # Dictionary of same length words
-        mydict = Google.filter_dict(len(start))
+        mydict = GoogleWordPuzzle.filter_dict(len(start))
 
         # This is basically a BFS traversal
         to_visit = deque([start])
@@ -139,7 +139,7 @@ class Google():
             v = to_visit.popleft()
             breakFlag = False
 
-            for w in Google.adjacent_words(mydict, v):
+            for w in GoogleWordPuzzle.adjacent_words(mydict, v):
                 if w not in discovered:
                     discovered[w] = (v, w)
                     to_visit.append(w)
@@ -168,7 +168,7 @@ class Google():
     def filter_dict(length):
         mydict = []
         try:
-            with open(Google.RESOURCE_FOLDER + "/words.txt") as words:
+            with open(GoogleWordPuzzle.RESOURCE_FOLDER + "/words.txt") as words:
                 count = 0
                 for word in words:
                     if len(word.strip()) == length:
