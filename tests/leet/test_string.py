@@ -1,4 +1,5 @@
 from unittest import TestCase
+import os
 
 from leet.string import *
 
@@ -33,3 +34,10 @@ class TestBox(TestCase):
         self.assertEqual(Box.complex_string("22+(2-4)"), 20)
         self.assertEqual(Box.complex_string("(2-4)"), -2)
         self.assertEqual(Box.complex_string("(4)"), 4)
+
+
+class TestGoogle(TestCase):
+
+    def test_word_puzzle(self):
+        Google.RESOURCE_FOLDER = os.getcwd() + "/resources"
+        Google.word_puzzle("mold", "etch")

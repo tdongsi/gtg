@@ -89,3 +89,25 @@ class Box():
                 stack.append(char)
 
         return Box.simple_string_serious(mstr[0:start] + ''.join(stack))
+
+
+class Google():
+
+    RESOURCE_FOLDER = "leet/resources"
+
+    @staticmethod
+    def word_puzzle(start: str, end: str):
+        """Solve puzzle: from a source word, modify one character in each step such that
+        the new word is valid in order to get to destination word.
+        """
+
+        try:
+            with open(Google.RESOURCE_FOLDER + "/words.txt") as words:
+                count = 0
+                for word in words:
+                    print(word)
+                    count += 1
+                    if count == 10:
+                        break
+        except IOError:
+            print("Error opening dictionary")
