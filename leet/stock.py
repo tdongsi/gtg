@@ -24,7 +24,7 @@ def buy_stock(prices:list) -> Tuple[int, int, int]:
     return profit, buy, sell
 
 
-def maximum_subarray(numbers:list) -> list:
+def maximum_subarray_alt(numbers:list) -> list:
     """ Largest Sum Contiguous Subarray.
     https://en.wikipedia.org/wiki/Maximum_subarray_problem
     """
@@ -40,3 +40,24 @@ def maximum_subarray(numbers:list) -> list:
     print(max_val)
 
     return numbers[(start+1):(end+1)]
+
+
+def maximum_subarray(nums: list) -> list:
+    """Maximum subarray without using helper function buy_stock."""
+    total = nums[0]
+    gap, start, end = 0, 0, 0
+    min_val, min_idx = nums[0], 0
+
+    for i in range(1, len(nums)):
+        total += nums[i]
+
+        if total - min_val > gap:
+            gap = total - min_val
+            end = i
+            start = min_idx
+
+        if total < min_val:
+            min_val = total
+            min_idx = i
+
+    return nums[start + 1: end + 1]
