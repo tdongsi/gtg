@@ -164,6 +164,25 @@ def DFS(g:Graph, u:Vertex, discovered):
             discovered[v] = e
             DFS(g, v, discovered)
 
+    pass
+
+
+def DFS_iter(g: Graph, s: Vertex) -> dict:
+    """DFS traversal using a stack."""
+    to_visit = [s]
+    discovered = {s: None}
+
+    while to_visit:
+        u = to_visit.pop()
+
+        for e in g.incident_edges(u):
+            v = e.opposite(u)
+            if v not in discovered:
+                discovered[v] = e
+                to_visit.append(v)
+
+    return discovered
+
 
 def construct_path(u:Vertex, v:Vertex, discovered):
     """ Construct a path from u to v.
@@ -210,6 +229,27 @@ def BFS(g:Graph, s:Vertex, discovered):
                     next_level.append(u)
 
         level = next_level
+    pass
+
+
+def BFS_iter(g: Graph, s: Vertex) -> dict:
+    """BFS traversal with a Queue"""
+    from collections import deque
+
+    discovered = {s: None}
+    to_visit = deque([s])
+
+    while to_visit:
+        v = to_visit.popleft()
+
+        for e in g.incident_edges(v):
+            u = e.opposite(v)
+
+            if u not in discovered:
+                discovered[u] = e
+                to_visit.append(u)
+
+    return discovered
 
 
 def is_bipartite(g:Graph, s:Vertex):
