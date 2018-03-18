@@ -148,6 +148,42 @@ class ExampleGraphs:
 
         return g
 
+    @staticmethod
+    def alphabet_graph():
+        """Example alphabet graph shown in Figure 14.9 (pg 641) and Figure 14.10 (pg 649)"""
+
+        graph = Graph()
+
+        a = graph.insert_vertex("a")
+        b = graph.insert_vertex("b")
+        c = graph.insert_vertex("c")
+        d = graph.insert_vertex("d")
+        e = graph.insert_vertex("e")
+        f = graph.insert_vertex("f")
+        g = graph.insert_vertex("g")
+        h = graph.insert_vertex("h")
+        i = graph.insert_vertex("i")
+        j = graph.insert_vertex("j")
+        k = graph.insert_vertex("k")
+        l = graph.insert_vertex("l")
+        m = graph.insert_vertex("m")
+        n = graph.insert_vertex("n")
+        o = graph.insert_vertex("o")
+        p = graph.insert_vertex("p")
+
+        graph.insert_edge(a, b)
+        graph.insert_edge(a, e)
+        graph.insert_edge(a, f)
+        graph.insert_edge(b, f)
+        graph.insert_edge(e, f)
+
+        graph.insert_edge(b, c)
+        graph.insert_edge(c, d)
+        graph.insert_edge(c, g)
+        graph.insert_edge(g, d)
+        graph.insert_edge(d, h)
+
+
 
 def DFS(g:Graph, u:Vertex, discovered):
     """ DFS traversal of the undiscovered portion of Graph g starting at Vertex u.
