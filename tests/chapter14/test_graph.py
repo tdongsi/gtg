@@ -19,6 +19,17 @@ class TestGraph(unittest.TestCase):
 
         sp_tree = shortest_path_tree(g, starting_vertex, cloud)
         path = construct_path(vertex_map["JFK"], vertex_map["LAX"], sp_tree)
+        print([str(ap) for ap in path])
 
-        for ap in path:
-            print(str(ap))
+    def test_dfs(self):
+        g, s = ExampleGraphs.alphabet_graph()
+
+        discovered = {s: None}
+        DFS(g, s, discovered)
+
+        discovered_iter = DFS_iter(g, s)
+
+        for v in g.vertices():
+            print("%s: %s vs %s", v, discovered[v], discovered_iter[v])
+
+    

@@ -150,7 +150,9 @@ class ExampleGraphs:
 
     @staticmethod
     def alphabet_graph():
-        """Example alphabet graph shown in Figure 14.9 (pg 641) and Figure 14.10 (pg 649)"""
+        """Example alphabet graph shown in Figure 14.9 (pg 641) and Figure 14.10 (pg 649)
+        Returning the graph and optional starting vertex.
+        """
 
         graph = Graph()
 
@@ -183,6 +185,24 @@ class ExampleGraphs:
         graph.insert_edge(g, d)
         graph.insert_edge(d, h)
 
+        graph.insert_edge(e, i)
+        graph.insert_edge(f, i)
+        graph.insert_edge(i, m)
+        graph.insert_edge(i, n)
+        graph.insert_edge(i, j)
+
+        graph.insert_edge(g, j)
+        graph.insert_edge(g, k)
+        graph.insert_edge(g, l)
+        graph.insert_edge(h, l)
+        graph.insert_edge(j, k)
+
+        graph.insert_edge(m, n)
+        graph.insert_edge(k, n)
+        graph.insert_edge(k, o)
+        graph.insert_edge(l, p)
+
+        return graph, a
 
 
 def DFS(g:Graph, u:Vertex, discovered):
