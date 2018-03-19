@@ -32,4 +32,14 @@ class TestGraph(unittest.TestCase):
         for v in g.vertices():
             print("%s: %s vs %s", v, discovered[v], discovered_iter[v])
 
-    
+    def test_bfs(self):
+        g, s = ExampleGraphs.alphabet_graph()
+
+        discovered = {s: None}
+        BFS(g, s, discovered)
+
+        discovered_iter = BFS_iter(g, s)
+
+        self.assertDictEqual(discovered, discovered_iter)
+        for v in g.vertices():
+            print("%s: %s vs %s", v, discovered[v], discovered_iter[v])
