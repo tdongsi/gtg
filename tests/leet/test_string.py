@@ -44,3 +44,19 @@ class TestGoogle(TestCase):
         # print(Google.word_puzzle("accent", "sprint"))
         # print(Google.word_puzzle("hello", "class"))
         print(GoogleWordPuzzle.word_puzzle("damp", "like"))
+
+
+class TestFacebook(TestCase):
+
+    def test_permutations(self):
+
+        import itertools
+        perms = itertools.permutations([1, 2, 3, 4])
+        for perm in perms:
+            # print(perm)
+            pass
+
+        perms = FacebookPerms.generate_perms([1, 2, 3, 4])
+        for perm in perms:
+            print(perm)
+

@@ -177,3 +177,16 @@ class GoogleWordPuzzle():
             print("Error opening dictionary")
 
         return mydict
+
+
+class FacebookPerms():
+
+    @staticmethod
+    def generate_perms(mlist):
+        """Generate permutations of a list"""
+        if not mlist or len(mlist) == 1:
+            yield mlist
+        else:
+            for perm in FacebookPerms.generate_perms(mlist[1:]):
+                for i in range(len(mlist)):
+                    yield perm[:i] + mlist[0:1] + perm[i:]
