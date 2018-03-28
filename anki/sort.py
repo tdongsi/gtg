@@ -225,3 +225,52 @@ def search_start(mlist, target):
                 hi = mid
 
         return -1
+
+
+def quicksort3(mlist, lo=0, hi=None):
+    """ Quick-sort using three-way partition strategy.
+    """
+
+    def partition3(mlist, lo, hi):
+        """ In-place three-way partition of the list will return [< pivot] [== pivot] [> pivot]
+
+        The two-way partition ([< pivot] [>= pivot]) seen in previous quicksort has the following degenerate cases:
+         1. Almost sorted lists. -> Defense: Use random swaps to scramble the lists before sorting.
+         2. Almost equal items. -> Defense: Use this three-way partition strategy.
+        """
+        pivot = mlist[hi-1]
+
+        idx1 = lo
+        for i in range(lo, hi-1):
+            if mlist[i] < pivot:
+                mlist[i], mlist[idx1] = mlist[idx1], mlist[i]
+                idx1 += 1
+
+        idx2 = idx1
+        for i in range(idx1, hi-1):
+            if mlist[i] == pivot:
+                mlist[i], mlist[idx2] = mlist[idx2], mlist[i]
+                idx2 += 1
+
+        # move the pivot to the right partition
+        mlist[idx2], mlist[hi - 1] = mlist[hi - 1], mlist[idx2]
+
+        return idx1, idx2
+
+    if not mlist:
+        return mlist
+
+    if hi is None:
+        hi = len(mlist)
+
+    if lo == hi:
+        # empty list
+        return mlist
+    elif lo == hi - 1:
+        # singleton list
+        return mlist
+    else:
+        p, q = partition3(mlist, lo, hi)
+        quicksort3(mlist, lo, p)
+        quicksort3(mlist, q + 1, hi)
+        return mlist
