@@ -29,7 +29,7 @@ def merge_sort(mlist):
         return _merge(left, right)
 
 
-def quicksort(mlist, lo=0, hi=None):
+def quick_sort(mlist, lo=0, hi=None):
 
     def partition(alist, lo, hi):
         pivot = alist[hi - 1]
@@ -57,8 +57,8 @@ def quicksort(mlist, lo=0, hi=None):
         return mlist
     else:
         p = partition(mlist, lo, hi)
-        quicksort(mlist, lo, p)
-        quicksort(mlist, p+1, hi)
+        quick_sort(mlist, lo, p)
+        quick_sort(mlist, p + 1, hi)
         return mlist
 
 

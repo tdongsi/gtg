@@ -188,5 +188,6 @@ class FacebookPerms():
             yield mlist
         else:
             for perm in FacebookPerms.generate_perms(mlist[1:]):
+                # NOTE: len(mlist) NOT len(perm)
                 for i in range(len(mlist)):
                     yield perm[:i] + mlist[0:1] + perm[i:]
