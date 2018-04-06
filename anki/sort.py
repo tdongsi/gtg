@@ -305,10 +305,7 @@ def quick_select(mlist, k, lo=0, hi=None):
     if lo == hi:  # empty
         return None
     elif lo == hi-1:  # singleton
-        if k == 0:
-            return mlist[lo]
-        else:
-            return None
+        return mlist[lo] if k == lo else None
     else:
         p = partition(mlist, lo, hi)
         if k == p:
@@ -316,4 +313,4 @@ def quick_select(mlist, k, lo=0, hi=None):
         elif k < p:
             return quick_select(mlist, k, lo, p)
         else:
-            return quick_select(mlist, k-p-1, p+1, hi)
+            return quick_select(mlist, k, p+1, hi)

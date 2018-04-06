@@ -49,10 +49,20 @@ class TestSelection(unittest.TestCase):
             for j in range(len(expected)):
                 mlist = expected[:]
                 random.shuffle(mlist)
-                print(mlist)
+                # print(mlist)
                 self.assertEqual(anki.sort.quick_select(mlist, j), expected[j])
 
         pass
+
+    def test_special_case(self):
+        mlist = [3, 0, 1, 2]
+        self.assertEqual(anki.sort.quick_select(mlist, 3), 3)
+
+        mlist = [0, 2, 3, 1]
+        self.assertEqual(anki.sort.quick_select(mlist, 2), 2)
+
+        mlist = [1, 2, 0, 3]
+        self.assertEqual(anki.sort.quick_select(mlist, 2), 2)
 
 
 class TestBinarySearch(unittest.TestCase):
