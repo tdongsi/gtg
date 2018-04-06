@@ -279,3 +279,41 @@ def quicksort3(mlist, lo=0, hi=None):
         quicksort3(mlist, lo, p)
         quicksort3(mlist, q + 1, hi)
         return mlist
+
+
+def quick_select(mlist, k, lo=0, hi=None):
+
+    def partition(mlist, lo, hi):
+        pidx = random.randint(lo, hi-1)
+        mlist[pidx], mlist[hi-1] = mlist[hi-1], mlist[pidx]
+        pivot = mlist[hi-1]
+        pos = lo
+
+        for i in range(lo, hi-1):
+            if mlist[i] < pivot:
+                mlist[i], mlist[pos] = mlist[pos], mlist[i]
+                pos += 1
+
+        mlist[hi-1], mlist[pos] = mlist[pos], pivot
+        return pos
+
+    if mlist is None:
+        return None
+    if hi is None:
+        hi = len(mlist)
+
+    if lo == hi:  # empty
+        return None
+    elif lo == hi-1:  # singleton
+        if k == 0:
+            return mlist[lo]
+        else:
+            return None
+    else:
+        p = partition(mlist, lo, hi)
+        if k == p:
+            return mlist[p]
+        elif k < p:
+            return quick_select(mlist, k, lo, p)
+        else:
+            return quick_select(mlist, k-p-1, p+1, hi)

@@ -2,7 +2,7 @@
 import random
 import unittest
 
-from anki.sort import quicksort3 as do_sort
+from anki.sort import quick_sort as do_sort
 import anki.sort
 
 
@@ -37,6 +37,22 @@ class TestSorting(unittest.TestCase):
 
     def test_large_range(self):
         self.assertEqual(do_sort([170, 45, 75, 90, 802, 24, 2, 66]), [2, 24, 45, 66, 75, 90, 170, 802])
+
+
+class TestSelection(unittest.TestCase):
+
+    def test_quick_select(self):
+
+        for i in range(1, 20):
+            # Do it 5 times
+            expected = list(range(i))
+            for j in range(len(expected)):
+                mlist = expected[:]
+                random.shuffle(mlist)
+                print(mlist)
+                self.assertEqual(anki.sort.quick_select(mlist, j), expected[j])
+
+        pass
 
 
 class TestBinarySearch(unittest.TestCase):
