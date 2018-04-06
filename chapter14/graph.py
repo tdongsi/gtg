@@ -482,3 +482,16 @@ def shortest_path_tree(g: Graph, s: Vertex, d:dict) -> dict:
                     tree[v] = e
 
     return tree
+
+
+def DFS_complete(g: Graph):
+
+    forest = {}
+
+    for v in g.vertices():
+        if v not in forest:
+            forest[v] = None
+            DFS(g, v, forest)
+
+    return forest
+
