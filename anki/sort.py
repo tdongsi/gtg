@@ -1,4 +1,5 @@
 
+import random
 
 def merge_sort(mlist):
     def _merge(left, right):
@@ -32,6 +33,8 @@ def merge_sort(mlist):
 def quick_sort(mlist, lo=0, hi=None):
 
     def partition(alist, lo, hi):
+        pidx = random.randint(lo, hi-1)
+        mlist[pidx], mlist[hi - 1] = mlist[hi - 1], mlist[pidx]
         pivot = alist[hi - 1]
         idx = lo
 
@@ -238,6 +241,8 @@ def quicksort3(mlist, lo=0, hi=None):
          1. Almost sorted lists. -> Defense: Use random swaps to scramble the lists before sorting.
          2. Almost equal items. -> Defense: Use this three-way partition strategy.
         """
+        pidx = random.randint(lo, hi-1)
+        mlist[pidx], mlist[hi-1] = mlist[hi-1], mlist[pidx]
         pivot = mlist[hi-1]
 
         idx1 = lo
