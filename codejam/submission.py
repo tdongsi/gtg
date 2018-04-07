@@ -26,7 +26,7 @@ class BaseSolver(metaclass=ABCMeta):
             with inf as f:
                 lines = f.readlines()
 
-                for case_num, line in enumerate(lines[2::2], start=1):
+                for case_num, line in enumerate(lines[1:], start=1):
                     result = self._solve(line.strip())
                     output.write("Case #%d: %s\n" % (case_num, result))
 
@@ -45,31 +45,7 @@ class Solver(BaseSolver):
     """
 
     def _solve(self, inputstr):
-        numbers = [int(e) for e in inputstr.split()]
-        sorted_nums = self._trouble_sort(numbers)
-
-        idx = 'OK'
-        for i in range(len(numbers) - 1):
-            if sorted_nums[i] > sorted_nums[i + 1]:
-                return str(i)
-
-        return idx
-
-    def _trouble_sort(self, mlist):
-        """Implementation of TroubleSort"""
-        done = False
-
-        if not mlist or len(mlist) <= 2:
-            return mlist
-
-        while not done:
-            done = True
-            for i in range(len(mlist) - 2):
-                if mlist[i] > mlist[i + 2]:
-                    mlist[i], mlist[i + 2] = mlist[i + 2], mlist[i]
-                    done = False
-
-        return mlist
+        return inputstr
 
 
 def main():

@@ -91,11 +91,21 @@ class TroubleSort(bs.BaseSolver):
         return mlist
 
 
+class CubeUfo(bs.BaseSolver):
+    """ Google Code Jam 2018.
+    https://codejam.withgoogle.com/2018/challenges/00000000000000cb/dashboard/00000000000079cc
+    """
+
+    def _solve(self, inputstr):
+        return inputstr
+
+
 def main():
     PROJECT_HOME = "/Users/tdongsi/Hub/gtg"
 
     # solver = SaveTheUniverse(PROJECT_HOME + "/data/SaveTheUniverse.txt")
-    solver = TroubleSort(PROJECT_HOME + "/data/TroubleSort.txt")
+    # solver = TroubleSort(PROJECT_HOME + "/data/TroubleSort.txt")
+    solver = CubeUfo(PROJECT_HOME + "/data/CubeUfo.txt")
 
     solver.solve()
 
