@@ -79,7 +79,19 @@ class TroubleSort(bs.BaseSolver):
         return idx
 
     def _trouble_sort(self, mlist):
-        """Implementation of TroubleSort"""
+        """ Trouble sorting is equivalent to sorting odd elements and even elements in place.
+
+        :param mlist:
+        :return:
+        """
+        temp = [0] * len(mlist)
+        temp[::2]= sorted(mlist[::2])
+        temp[1::2] = sorted(mlist[1::2])
+
+        return temp
+
+    def _trouble_sort_naive(self, mlist):
+        """Naive Implementation of TroubleSort"""
         done = False
 
         if not mlist or len(mlist) <= 2:
