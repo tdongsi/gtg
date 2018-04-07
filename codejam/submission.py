@@ -1,14 +1,5 @@
 
-import codejam.base as bs
-
-
-class Solver(bs.BaseSolver):
-
-    def _solve(self, inputstr):
-        return inputstr
-
-    pass
-
+from codejam.y2018 import SaveTheUniverse as Solver
 
 def main():
     PROJECT_HOME = "/Users/tdongsi/Hub/gtg"
