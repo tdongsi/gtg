@@ -55,8 +55,8 @@ class Solver(BaseSolver):
         return template.format(*itertools.chain.from_iterable(centers))
 
     def _compute(self, area: float):
-        """ Purely mathematical solution for Test set: 1.000000 ≤ A ≤ 1.414213.
-        For A ≤ 1.414213, it is satisfactory to just rotate around z axis.
+        """ Purely mathematical solution for Test set: 1.000000 <= A <= 1.414213.
+        For A <= 1.414213, it is satisfactory to just rotate around z axis.
         One side of the projection will be always 1. The area is dependent on the other side length of projection
 
         At the angle x = 0, the other side's length is 1.
@@ -74,9 +74,9 @@ class Solver(BaseSolver):
         :param area: input area
         :return:
         """
-        k2 = decimal.Decimal(area * area)
+        k2 = decimal.Decimal(area*area)
         one = decimal.Decimal(1.0)
-        alpha = math.asin(k2 - one) / 2
+        alpha = math.asin(k2 - one)/2
 
         cos = math.cos(alpha) * 0.5
         sin = math.sin(alpha) * 0.5
