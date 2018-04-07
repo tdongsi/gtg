@@ -59,9 +59,36 @@ class SaveTheUniverse(bs.BaseSolver):
 
 
 class TroubleSort(bs.BaseSolver):
+    """ Google Code Jam 2018.
+    https://codejam.withgoogle.com/2018/challenges/00000000000000cb/dashboard/00000000000079cb
+    """
 
     def _solve(self, inputstr):
-        return inputstr
+        numbers = [int(e) for e in inputstr.split()]
+        sorted_nums = self._trouble_sort(numbers)
+
+        idx = 'OK'
+        for i in range(len(numbers)-1):
+            if sorted_nums[i] > sorted_nums[i+1]:
+                return str(i)
+
+        return idx
+
+    def _trouble_sort(self, mlist):
+        """Implementation of TroubleSort"""
+        done = False
+
+        if not mlist or len(mlist) <= 2:
+            return mlist
+
+        while not done:
+            done = True
+            for i in range(len(mlist)-2):
+                if mlist[i] > mlist[i+2]:
+                    mlist[i], mlist[i+2] = mlist[i+2], mlist[i]
+                    done = False
+
+        return mlist
 
 
 def main():
