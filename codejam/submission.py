@@ -24,8 +24,8 @@ class Solver():
                 lines = f.readlines()
 
                 for case_num, line in enumerate(lines[1:], start=1):
-                    number = self._solve(line.strip())
-                    output.write("Case #%d: %s\n" % (case_num, number))
+                    result = self._solve(line.strip())
+                    output.write("Case #%d: %s\n" % (case_num, result))
 
         except IOError:
             print("Error opening file")
