@@ -58,11 +58,19 @@ class SaveTheUniverse(bs.BaseSolver):
         return count
 
 
+class TroubleSort(bs.BaseSolver):
+
+    def _solve(self, inputstr):
+        return inputstr
+
+
 def main():
     PROJECT_HOME = "/Users/tdongsi/Hub/gtg"
-    solver = SaveTheUniverse(PROJECT_HOME + "/data/SaveTheUniverse.txt")
-    with open("out.txt", "w") as f:
-        solver.solve()
+
+    # solver = SaveTheUniverse(PROJECT_HOME + "/data/SaveTheUniverse.txt")
+    solver = TroubleSort(PROJECT_HOME + "/data/TroubleSort.txt")
+
+    solver.solve()
 
 
 if __name__ == "__main__":

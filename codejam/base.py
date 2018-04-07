@@ -26,7 +26,7 @@ class BaseSolver(metaclass=ABCMeta):
             with inf as f:
                 lines = f.readlines()
 
-                for case_num, line in enumerate(lines[1:], start=1):
+                for case_num, line in enumerate(lines[2::2], start=1):
                     result = self._solve(line.strip())
                     output.write("Case #%d: %s\n" % (case_num, result))
 
