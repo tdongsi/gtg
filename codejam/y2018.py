@@ -173,8 +173,8 @@ def main():
     PROJECT_HOME = "/Users/tdongsi/Hub/gtg"
 
     # solver = SaveTheUniverse(PROJECT_HOME + "/data/SaveTheUniverse.txt")
-    # solver = TroubleSort(PROJECT_HOME + "/data/TroubleSort.txt")
-    solver = CubeUfo(PROJECT_HOME + "/data/CubeUfo.txt")
+    solver = TroubleSort(PROJECT_HOME + "/data/TroubleSort.txt")
+    # solver = CubeUfo(PROJECT_HOME + "/data/CubeUfo.txt")
 
     solver.solve()
 
