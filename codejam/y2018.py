@@ -10,7 +10,11 @@ class SaveTheUniverse(bs.BaseSolver):
 
     def _solve(self, inputstr):
         limit, program = inputstr.split()
-        return "limit: %s program: %s" % (limit, program)
+        try:
+            count = self._compute(int(limit), program)
+            return str(count)
+        except ValueError:
+            return "IMPOSSIBLE"
 
     def _compute_damage(self, program):
         cur_hit = 1
@@ -21,3 +25,19 @@ class SaveTheUniverse(bs.BaseSolver):
             elif c == 'S':
                 total += cur_hit
         return total
+
+    def _compute(self, limit: int, program: str):
+
+        count = 0
+        damage = self._compute_damage(program)
+        while damage > limit:
+            idx = program.rfind('CS')
+            if idx == -1:
+                raise ValueError('Impossible')
+            else:
+                count += 1
+                program = program[:idx] + 'SC' + program[idx+2:]
+                # print(program)
+                damage = self._compute_damage(program)
+
+        return count
