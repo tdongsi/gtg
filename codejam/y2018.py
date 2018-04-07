@@ -2,6 +2,7 @@
 import itertools
 import math
 import decimal
+import sys
 
 import codejam.base as bs
 
@@ -147,6 +148,25 @@ class CubeUfo(bs.BaseSolver):
         sin = math.sin(alpha) * 0.5
 
         return [(cos, sin, 0.0), (-sin, cos, 0.0), (0.0, 0.0, 0.5)]
+
+
+class GoGopher():
+    """ Google Code Jam 2018.
+    https://codejam.withgoogle.com/2018/challenges/00000000000000cb/dashboard/0000000000007a30
+    """
+
+    def solve(self):
+        T = int(input())
+        for _ in range(T):
+            A = int(input())
+            self._compute(A)
+        pass
+
+    def _compute(self, A):
+        print("10 10")
+        sys.stdout.flush()
+        a, b = map(int, input().split())
+        pass
 
 
 def main():
