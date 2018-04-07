@@ -50,6 +50,7 @@ class SaveTheUniverse(bs.BaseSolver):
                 program = program[:idx] + 'SC' + program[idx+2:]
 
                 # damage recomputed more efficiently this way
+                # O(1) instead of O(n) if using function _compute_damage(program)
                 charge[idx] //= 2
                 # print(charge)
                 damage -= charge[idx]
