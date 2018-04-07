@@ -5,7 +5,7 @@ import sys
 
 class BaseSolver(metaclass=ABCMeta):
 
-    def __init__(self, filename):
+    def __init__(self, filename=None):
         """ Initialize with the given input file.
 
         :param filename: input file path
@@ -21,8 +21,9 @@ class BaseSolver(metaclass=ABCMeta):
         :param output: specify output to file or screen.
         :return:
         """
+        inf = open(self._filename) if self._filename else sys.stdin
         try:
-            with open(self._filename, 'r') as f:
+            with inf as f:
                 lines = f.readlines()
 
                 for case_num, line in enumerate(lines[1:], start=1):
@@ -80,10 +81,11 @@ class Solver(BaseSolver):
 
 
 def main():
-    PROJECT_HOME = "/Users/tdongsi/Hub/gtg"
-    solver = Solver(PROJECT_HOME + "/data/SaveTheUniverse.txt")
-    with open("out.txt", "w") as f:
-        solver.solve(output=f)
+    """ Example run:
+    python3 codejam/submission.py < /Users/tdongsi/Hub/gtg/data/SaveTheUniverse.txt
+    """
+    solver = Solver()
+    solver.solve()
 
 
 if __name__ == "__main__":

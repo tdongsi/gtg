@@ -5,7 +5,7 @@ import sys
 
 class BaseSolver(metaclass=ABCMeta):
 
-    def __init__(self, filename):
+    def __init__(self, filename=None):
         """ Initialize with the given input file.
 
         :param filename: input file path
@@ -21,8 +21,9 @@ class BaseSolver(metaclass=ABCMeta):
         :param output: specify output to file or screen.
         :return:
         """
+        inf = open(self._filename) if self._filename else sys.stdin
         try:
-            with open(self._filename, 'r') as f:
+            with inf as f:
                 lines = f.readlines()
 
                 for case_num, line in enumerate(lines[1:], start=1):
