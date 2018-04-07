@@ -41,3 +41,14 @@ class SaveTheUniverse(bs.BaseSolver):
                 damage = self._compute_damage(program)
 
         return count
+
+
+def main():
+    PROJECT_HOME = "/Users/tdongsi/Hub/gtg"
+    solver = SaveTheUniverse(PROJECT_HOME + "/data/SaveTheUniverse.txt")
+    with open("out.txt", "w") as f:
+        solver.solve()
+
+
+if __name__ == "__main__":
+    main()
