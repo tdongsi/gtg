@@ -1,4 +1,7 @@
 
+import itertools
+import math
+
 import codejam.base as bs
 
 
@@ -97,7 +100,37 @@ class CubeUfo(bs.BaseSolver):
     """
 
     def _solve(self, inputstr):
-        return inputstr
+        area = float(inputstr)
+        centers = self._compute(area)
+        template = "{0} {1} {2}\n{3} {4} {5}\n{6} {7} {8}"
+
+        return template.format(*itertools.chain.from_iterable(centers))
+
+    def _compute(self, area: float):
+        """ Purely mathematical solution for Test set: 1.000000 ≤ A ≤ 1.414213.
+        For A ≤ 1.414213, it is satisfactory to just rotate around z axis.
+        One side of the projection will be always 1. The area is dependent on the other side length of projection
+
+        At the angle x = 0, the other side's length is 1.
+        For rotation of radian x, the other side's length is cos(x) + sin(x).
+
+        In that case, the output of three centers are as follows:
+        0.5*cos(x) 0.5*sin(x) 0
+        -0.5*sin(x) 0.5*cos(x) 0
+        0 0 0.5
+
+        The problem is reduced to given A = cos(x) + sin(x), find cos(x) and sin(x).
+        Given that 1 = cos(x) ^ 2 + sin(x) ^ 2, it can be solved using quadratic equation's formula.
+
+        :param area: input area
+        :return:
+        """
+
+        delta = math.sqrt(2 - area**2)
+        cos = (area + delta) / 2
+        sin = (area - delta) / 2
+
+        return [(0.5*cos, 0.5*sin, 0.0), (-0.5*sin, 0.5*cos, 0.0), (0.0, 0.0, 0.5)]
 
 
 def main():
