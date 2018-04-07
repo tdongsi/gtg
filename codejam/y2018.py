@@ -26,10 +26,21 @@ class SaveTheUniverse(bs.BaseSolver):
                 total += cur_hit
         return total
 
+    def _compute_charge(self, program):
+        cur_hit = 1
+        charge = [0] * len(program)
+        for idx, c in enumerate(program):
+            if c == 'C':
+                cur_hit *= 2
+            charge[idx] = cur_hit
+        return charge
+
     def _compute(self, limit: int, program: str):
 
         count = 0
         damage = self._compute_damage(program)
+        charge = self._compute_charge(program)
+        # print(charge)
         while damage > limit:
             idx = program.rfind('CS')
             if idx == -1:
@@ -37,8 +48,11 @@ class SaveTheUniverse(bs.BaseSolver):
             else:
                 count += 1
                 program = program[:idx] + 'SC' + program[idx+2:]
-                # print(program)
-                damage = self._compute_damage(program)
+
+                # damage recomputed more efficiently this way
+                charge[idx] //= 2
+                # print(charge)
+                damage -= charge[idx]
 
         return count
 
