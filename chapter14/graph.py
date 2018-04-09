@@ -523,3 +523,50 @@ def DFS_complete(g: Graph):
 
     return forest
 
+
+def edmonds_karp(g: Graph, source: Vertex, sink: Vertex):
+
+    def BFS_augment_path(g, s, t):
+        """ Find BFS path from s to t in network flow graph.
+
+        :param s: source
+        :param t: sink
+        :return: list of edges from s to t. Empty if there is no path.
+        """
+        discovered = BFS_iter(g, s)
+        vertices = construct_path(s, t, discovered)
+        edges = []
+
+        if vertices:
+            for i in range(len(vertices)-1):
+                edges.append(g.get_edge(vertices[i], vertices[i+1]))
+
+        return edges
+
+    # g = deepcopy(network)  # residual graph
+    max_flow = 0
+    path = BFS_augment_path(g, source, sink)
+
+    while path:
+
+        path_flow = min([e.element() for e in path])
+        max_flow += path_flow
+
+        for e in path:
+            u, v = e.endpoints()
+            cur = e.element()
+            if cur - path_flow == 0:
+                g.delete_edge(u, v)
+            else:
+                e.set_element(cur - path_flow)
+
+            if g.get_edge(v, u) is None:
+                g.insert_edge(v, u, path_flow)
+            else:
+                reverse_edge = g.get_edge(v, u)
+                cur = reverse_edge.element()
+                reverse_edge.set_element(cur + path_flow)
+
+        path = BFS_augment_path(g, source, sink)
+
+    return max_flow
