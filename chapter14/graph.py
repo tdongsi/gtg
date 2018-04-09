@@ -41,6 +41,10 @@ class Edge:
     def element(self):
         return self._element
 
+    def set_element(self, val):
+        self._element = val
+        pass
+
     def __hash__(self):
         return hash((self._src, self._des))
 
@@ -107,6 +111,11 @@ class Graph:
         self._outgoing[u][v] = e
         self._incoming[v][u] = e
         return e
+
+    def delete_edge(self, u, v):
+        del self._outgoing[u][v]
+        del self._incoming[v][u]
+        pass
 
 
 class ExampleGraphs:
@@ -203,6 +212,25 @@ class ExampleGraphs:
         graph.insert_edge(l, p)
 
         return graph, a
+
+    @staticmethod
+    def simplet_network_flow():
+        """Simple network flow. Based on Figure 7.6 from Algorithm Design book by Kleinberg, Tardos."""
+
+        g = Graph(directed=True)
+
+        source = g.insert_vertex("s")
+        sink = g.insert_vertex("t")
+        u = g.insert_vertex("u")
+        v = g.insert_vertex("v")
+
+        g.insert_edge(source, u, 100)
+        g.insert_edge(source, v, 100)
+        g.insert_edge(u, v, 1)
+        g.insert_edge(u, sink, 100)
+        g.insert_edge(v, sink, 100)
+
+        return g, source, sink
 
 
 def DFS(g:Graph, u:Vertex, discovered):

@@ -9,7 +9,8 @@ class TestGraph(unittest.TestCase):
     def test_dijkstra_algorithm(self):
         g = ExampleGraphs.airport_graph()
 
-        vertex_map = {v.element() : v for v in g.vertices()}
+        # This map is created for readability
+        vertex_map = {v.element(): v for v in g.vertices()}
         starting_vertex = vertex_map["JFK"]
 
         cloud = shortest_path_lengths(g, starting_vertex)
@@ -43,3 +44,11 @@ class TestGraph(unittest.TestCase):
         self.assertDictEqual(discovered, discovered_iter)
         for v in g.vertices():
             print("%s: %s vs %s", v, discovered[v], discovered_iter[v])
+        pass
+
+    def test_edmond_karp(self):
+        g, source, sink = ExampleGraphs.simplet_network_flow()
+
+        max_flow = edmonds_karp(g, source, sink)
+        self.assertEqual(max_flow, 200)
+        pass
