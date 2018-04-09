@@ -232,6 +232,32 @@ class ExampleGraphs:
 
         return g, source, sink
 
+    @staticmethod
+    def demo_network_flow():
+        """Demo network flow, as shown in Network Flow slides.
+        http://www.cs.princeton.edu/~wayne/kleinberg-tardos/pdf/07DemoFordFulkerson.pdf
+        """
+        g = Graph(directed=True)
+
+        source = g.insert_vertex("s")
+        sink = g.insert_vertex("t")
+        a = g.insert_vertex("a")
+        b = g.insert_vertex("b")
+        c = g.insert_vertex("c")
+        d = g.insert_vertex("d")
+
+        g.insert_edge(source, a, 10)
+        g.insert_edge(source, c, 10)
+        g.insert_edge(a, c, 2)
+        g.insert_edge(a, b, 4)
+        g.insert_edge(a, d, 8)
+        g.insert_edge(c, d, 9)
+        g.insert_edge(d, b, 6)
+        g.insert_edge(b, sink, 10)
+        g.insert_edge(d, sink, 10)
+
+        return g, source, sink
+
 
 def DFS(g:Graph, u:Vertex, discovered):
     """ DFS traversal of the undiscovered portion of Graph g starting at Vertex u.
@@ -525,6 +551,14 @@ def DFS_complete(g: Graph):
 
 
 def edmonds_karp(g: Graph, source: Vertex, sink: Vertex):
+    """ Edmonds-Karp implementation of Ford-Fulkerson method.
+    If you have an original network flow, you should create a deep copy of it AND retrieve the right source/sink vertcies.
+
+    :param g: residual graph
+    :param source: source Vertex
+    :param sink: sink Vertex
+    :return: maximum flow
+    """
 
     def BFS_augment_path(g, s, t):
         """ Find BFS path from s to t in network flow graph.
@@ -543,7 +577,6 @@ def edmonds_karp(g: Graph, source: Vertex, sink: Vertex):
 
         return edges
 
-    # g = deepcopy(network)  # residual graph
     max_flow = 0
     path = BFS_augment_path(g, source, sink)
 
@@ -554,12 +587,15 @@ def edmonds_karp(g: Graph, source: Vertex, sink: Vertex):
 
         for e in path:
             u, v = e.endpoints()
+
+            # Update forward residual edge
             cur = e.element()
             if cur - path_flow == 0:
                 g.delete_edge(u, v)
             else:
                 e.set_element(cur - path_flow)
 
+            # Update backward residual edge
             if g.get_edge(v, u) is None:
                 g.insert_edge(v, u, path_flow)
             else:

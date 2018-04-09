@@ -48,7 +48,10 @@ class TestGraph(unittest.TestCase):
 
     def test_edmond_karp(self):
         g, source, sink = ExampleGraphs.simplet_network_flow()
-
         max_flow = edmonds_karp(g, source, sink)
         self.assertEqual(max_flow, 200)
+
+        g, source, sink = ExampleGraphs.demo_network_flow()
+        max_flow = edmonds_karp(g, source, sink)
+        self.assertEqual(max_flow, 19)
         pass
