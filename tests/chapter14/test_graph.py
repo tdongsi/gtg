@@ -54,4 +54,8 @@ class TestGraph(unittest.TestCase):
         g, source, sink = ExampleGraphs.demo_network_flow()
         max_flow = edmonds_karp(g, source, sink)
         self.assertEqual(max_flow, 19)
+
+        g, source, sink = ExampleGraphs.bipartite_matching_graph()
+        max_flow = edmonds_karp(g, source, sink)
+        self.assertEqual(max_flow, 4)
         pass

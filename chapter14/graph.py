@@ -258,6 +258,57 @@ class ExampleGraphs:
 
         return g, source, sink
 
+    @staticmethod
+    def bipartite_matching_graph():
+        """ Network flow for example bipartite matching problem.
+        Based on Figure 7.9 from Algorithm Design book by Kleinberg, Tardos.
+        """
+        g = Graph(directed=True)
+
+        source = g.insert_vertex("s")
+        sink = g.insert_vertex("t")
+
+        m1 = g.insert_vertex("M1")
+        m2 = g.insert_vertex("M2")
+        m3 = g.insert_vertex("M3")
+        m4 = g.insert_vertex("M4")
+        m5 = g.insert_vertex("M5")
+
+        f1 = g.insert_vertex("F1")
+        f2 = g.insert_vertex("F2")
+        f3 = g.insert_vertex("F3")
+        f4 = g.insert_vertex("F4")
+        f5 = g.insert_vertex("F5")
+
+        g.insert_edge(source, m1, 1)
+        g.insert_edge(source, m2, 1)
+        g.insert_edge(source, m3, 1)
+        g.insert_edge(source, m4, 1)
+        g.insert_edge(source, m5, 1)
+
+        g.insert_edge(f1, sink, 1)
+        g.insert_edge(f2, sink, 1)
+        g.insert_edge(f3, sink, 1)
+        g.insert_edge(f4, sink, 1)
+        g.insert_edge(f5, sink, 1)
+
+        g.insert_edge(m1, f1, 1)
+        g.insert_edge(m1, f3, 1)
+
+        g.insert_edge(m2, f1, 1)
+        g.insert_edge(m2, f2, 1)
+        g.insert_edge(m2, f3, 1)
+        g.insert_edge(m2, f4, 1)
+
+        g.insert_edge(m3, f4, 1)
+
+        g.insert_edge(m4, f4, 1)
+
+        g.insert_edge(m5, f4, 1)
+        g.insert_edge(m5, f5, 1)
+
+        return g, source, sink
+
 
 def DFS(g:Graph, u:Vertex, discovered):
     """ DFS traversal of the undiscovered portion of Graph g starting at Vertex u.
