@@ -9,7 +9,7 @@ A group of problems related to histogram
 def largest_rect_histogram_DnC(heights: list) -> int:
     """ Find the largest rectangular area possible in a given histogram
     where the largest rectangle can be made of a number of contiguous bars.
-    Divide and Conquer solution
+    Divide and Conquer solution. O(n logn)
     https://www.geeksforgeeks.org/largest-rectangular-area-in-a-histogram-set-1/
 
     :param mlist: list of bar heights, each bar width = 1.
@@ -35,3 +35,22 @@ def largest_rect_histogram_DnC(heights: list) -> int:
 
     # Find max of 3
     return max(front, current, back)
+
+
+def largest_rect_histogram_stack(heights: list) -> int:
+    """ Find the largest rectangular area possible in a given histogram
+    where the largest rectangle can be made of a number of contiguous bars.
+    Divide and Conquer solution. O(n logn)
+    https://www.geeksforgeeks.org/largest-rectangular-area-in-a-histogram-set-1/
+
+    :param mlist: list of bar heights, each bar width = 1.
+    :return: area of the largest rectangle.
+    """
+    if len(heights) == 1:
+        return heights[0]
+    elif len(heights) == 0:
+        return 0
+
+
+
+    return 0
