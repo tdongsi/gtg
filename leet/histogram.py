@@ -40,19 +40,23 @@ def largest_rect_histogram_DnC(heights: list) -> int:
 def largest_rect_histogram_stack(heights: list) -> int:
     """ Find the largest rectangular area possible in a given histogram
     where the largest rectangle can be made of a number of contiguous bars.
-    Divide and Conquer solution. O(n logn)
-    https://www.geeksforgeeks.org/largest-rectangular-area-in-a-histogram-set-1/
+
+    O(n) solution with a stack. Intuition explained in https://www.youtube.com/watch?v=VNbkzsnllsU.
+
+    Using a stack to store (left_idx, height).
+
+    Going from left to right, if current height (2) is smaller than top of the stack (6).
+    1) Pop stack: left_idx, height = s.pop()
+    2) Calculate best rectangle: area = height * (cur_idx - left_idx). Update max.
+    3) Prepare new item: (left_idx, cur_height). NOTE: left_idx, not cur_idx.
+    4) If top of the stack > cur_height, continue.
 
     :param mlist: list of bar heights, each bar width = 1.
     :return: area of the largest rectangle.
     """
-    if len(heights) == 1:
-        return heights[0]
-    elif len(heights) == 0:
-        return 0
 
     stack = []
-    max_area = -1
+    max_area = 0
     peek_idx = -1  # idx of stack peek
 
     for idx, e in enumerate(heights):
@@ -68,20 +72,19 @@ def largest_rect_histogram_stack(heights: list) -> int:
                     temp = peek_height * (idx - peek_idx)
                     if max_area < temp:
                         max_area = temp
+                    idx = peek_idx
                 else:
-                    peek_idx = idx
                     break
 
             # push back the current bar
-            stack.append((peek_idx, e))
+            stack.append((idx, e))
 
     # Handle the bars still in the stack
-    idx = len(heights) + 1
+    idx = len(heights)
     while stack:
         peek_idx, peek_height = stack.pop()
         temp = peek_height * (idx - peek_idx)
         if max_area < temp:
             max_area = temp
-
 
     return max_area
