@@ -57,7 +57,6 @@ def largest_rect_histogram_stack(heights: list) -> int:
 
     stack = []
     max_area = 0
-    peek_idx = -1  # idx of stack peek
 
     for idx, e in enumerate(heights):
         if not stack:
