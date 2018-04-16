@@ -59,25 +59,22 @@ def largest_rect_histogram_stack(heights: list) -> int:
     max_area = 0
 
     for idx, e in enumerate(heights):
-        if not stack:
-            stack.append((idx, e))
-        else:
-            save_idx = idx
-            while stack:
-                # peek top of the stack
-                peek_idx, peek_height = stack[-1]
-                if e < peek_height:
-                    stack.pop()
-                    save_idx = peek_idx
+        save_idx = idx
+        while stack:
+            # peek top of the stack
+            peek_idx, peek_height = stack[-1]
+            if e < peek_height:
+                stack.pop()
+                save_idx = peek_idx
 
-                    temp = peek_height * (idx - peek_idx)
-                    if max_area < temp:
-                        max_area = temp
-                else:
-                    break
+                temp = peek_height * (idx - peek_idx)
+                if max_area < temp:
+                    max_area = temp
+            else:
+                break
 
-            # push back the current bar
-            stack.append((save_idx, e))
+        # push back the current bar
+        stack.append((save_idx, e))
 
     # Handle the bars still in the stack
     idx = len(heights)
