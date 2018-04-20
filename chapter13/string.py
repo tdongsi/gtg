@@ -29,7 +29,6 @@ def find_boyer_moore(text:str, subs:str):
     :param text: text T
     :param subs: substring P
     :return: lowest index of T
-
     """
     if not text or not subs:
         return -1
@@ -52,7 +51,63 @@ def find_boyer_moore(text:str, subs:str):
                 k -= 1
         else:
             j = last.get(text[i], -1)
+            # Sanity check:
+            # 1) text[i] not in last -> i += m
+            # 2) text[i] in last -> i += m - (j+1)
             i += m - min(k, j+1)
             k = m -1  # restart at end of pattern
+
+    return -1
+
+
+def compute_kmp_fail(pattern: str):
+    """ Utility function that computes and returns KMP failure function.
+
+    :param pattern: the pattern
+    :return: list as lookup table
+    """
+    m = len(pattern)
+    fail = [0] * m
+    j = 1
+    k = 0
+    while j < m:
+        if pattern[j] == pattern[k]:  # k+1 characters match thus far
+            fail[j] = k+1
+            j += 1
+            k += 1
+        elif k > 0:
+            k = fail[k-1]
+        else:  # no match found starting a j
+            j += 1
+    return fail
+
+
+def find_kmp(text: str, subs: str):
+    """ Pattern matching with Knuth-Morris-Pratt algorithm.
+    Return the lowest index of text T at which substring P begins (or else -1).
+
+    :param text: text T
+    :param subs: substring P
+    :return: lowest index of T
+    """
+    if not text or not subs:
+        return -1
+
+    n, m = len(text), len(subs)
+
+    fail = compute_kmp_fail(subs)
+
+    j = 0
+    k = 0
+    while j < n:
+        if text[j] == subs[k]:
+            if k == m-1:
+                return j - m + 1
+            j += 1
+            k += 1
+        elif k > 0:
+            k = fail[k-1]
+        else:
+            j += 1
 
     return -1

@@ -13,3 +13,6 @@ class TestString(unittest.TestCase):
 
         self.assertEqual(gtg.find_boyer_moore('ANPANMAN', 'PAN'), 2)
         self.assertEqual(gtg.find_boyer_moore('abacaabaccabacabaabb', 'abacab'), 10)
+
+        self.assertEqual(gtg.find_kmp('ANPANMAN', 'PAN'), 2)
+        self.assertEqual(gtg.find_kmp('abacaabaccabacabaabb', 'abacab'), 10)
