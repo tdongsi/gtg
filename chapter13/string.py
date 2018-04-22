@@ -111,3 +111,21 @@ def find_kmp(text: str, subs: str):
             j += 1
 
     return -1
+
+
+def longest_common_subsequence(str1:str, str2:str) -> int:
+    if not str1 or not str2:
+        return 0
+
+    m = len(str1)
+    n = len(str2)
+    mtable = [[0]*(n+1) for _ in range(m+1)]
+
+    for i in range(1, m+1):
+        for j in range(1, n+1):
+            if str1[i-1] == str2[j-1]:
+                mtable[i][j] = 1 + mtable[i-1][j-1]
+            else:
+                mtable[i][j] = max(mtable[i-1][j], mtable[i][j-1])
+
+    return mtable
