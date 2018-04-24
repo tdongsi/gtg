@@ -59,6 +59,7 @@ class TestTrie(unittest.TestCase):
         trie.insert('lmn$')
 
         trie.list()
+        print(trie.list())
 
     def test_ctci_contacts(self):
 

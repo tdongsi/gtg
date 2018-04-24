@@ -211,12 +211,12 @@ class Trie():
         return False
 
     def list(self):
-        self._list(self._root, "")
+        return list(self._list(self._root, ""))
 
     def _list(self, current: TrieNode, prefix: str):
         if current.word_end:
-            print(prefix)
-            # yield prefix
+            # print(prefix)
+            yield prefix
         else:
             for k in current.children:
-                self._list(current.children[k], prefix + k)
+                yield from self._list(current.children[k], prefix + k)
