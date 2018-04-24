@@ -48,6 +48,18 @@ class TestTrie(unittest.TestCase):
         trie.delete('abcd$')
         trie.list()
 
+    def test_list(self):
+
+        trie = gtg.Trie()
+
+        trie.insert('abc$')
+        trie.insert('abgl$')
+        trie.insert('cdf$')
+        trie.insert('abcd$')
+        trie.insert('lmn$')
+
+        trie.list()
+
     def test_ctci_contacts(self):
 
         trie = gtg.Trie()
