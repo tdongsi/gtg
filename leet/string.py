@@ -191,3 +191,25 @@ class FacebookPerms():
                 # NOTE: len(mlist) NOT len(perm)
                 for i in range(len(mlist)):
                     yield perm[:i] + mlist[0:1] + perm[i:]
+
+
+class LinkedIn():
+
+    @staticmethod
+    def min_word_dist(words, word1, word2):
+        """Calculate the shortest distance between 2 words in a word list.
+        The word list is given to the constructor, and may contain more than 1 instance of each word.
+        Example: "the quick brown fox quick jumps", distance(fox, quick) should return 1
+        (indices for fox = (3), quick = (1, 4), smallest distance is between 3 & 4).
+        """
+
+        occ_1 = [idx for idx, word in enumerate(words) if word == word1]
+        occ_2 = [idx for idx, word in enumerate(words) if word == word2]
+
+        min_dist = len(words)
+        for num1 in occ_1:
+            for num2 in occ_2:
+                if abs(num1-num2) < min_dist:
+                    min_dist = abs(num1-num2)
+
+        return min_dist

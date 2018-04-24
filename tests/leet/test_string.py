@@ -60,3 +60,9 @@ class TestFacebook(TestCase):
         for perm in perms:
             print(perm)
 
+
+class TestLinkedIn(TestCase):
+
+    def test_min_word_dist(self):
+        words = "the quick brown fox quick jumps".split()
+        self.assertEqual(LinkedIn.min_word_dist(words, "fox", "quick"), 1)
