@@ -9,13 +9,3 @@ def find_uniques(mlist: list):
     return out
 
 
-def permutations(mlist: list):
-    if not mlist:
-        return
-
-    if len(mlist) == 1:
-        yield mlist
-    else:
-        for perm in permutations(mlist[1:]):
-            for i in range(len(mlist)):
-                yield perm[:i] + mlist[0:1] + perm[i:]
