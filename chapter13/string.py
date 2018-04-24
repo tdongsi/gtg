@@ -132,11 +132,12 @@ def longest_common_subsequence(str1:str, str2:str) -> int:
 
 
 class TrieNode():
-    __slots__ = 'children', 'word_end'
+    __slots__ = 'children', 'word_end', 'size'
 
     def __init__(self):
         self.children = {}
         self.word_end = False
+        self.size = 0
 
 
 class Trie():
@@ -148,6 +149,7 @@ class Trie():
         current = self._root
 
         for c in word:
+            current.size += 1
             node = current.children.get(c)
             if node is None:
                 node = TrieNode()
@@ -156,9 +158,11 @@ class Trie():
             current = node
 
         # Mark the last one as end of word
+        current.size += 1
         current.word_end = True
 
     def search(self, word):
+        """Check if the given word is present"""
         current = self._root
 
         for c in word:
@@ -168,6 +172,18 @@ class Trie():
             current = node
 
         return current.word_end
+
+    def search_partial(self, prefix):
+        """Count the number of contacts starting with prefix."""
+        current = self._root
+
+        for c in prefix:
+            node = current.children.get(c)
+            if node is None:
+                return 0
+            current = node
+
+        return current.size
 
     def delete(self, word):
         self._delete(self._root, word, 0)

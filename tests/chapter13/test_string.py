@@ -36,3 +36,26 @@ class TestTrie(unittest.TestCase):
         self.assertEqual(trie.search('ab$'), False)
         self.assertEqual(trie.search('cdf$'), True)
         self.assertEqual(trie.search('ghi$'), False)
+
+        print("Check Delete")
+        print("Delete #1:")
+        trie.delete('abc$')
+        trie.list()
+        print("Delete #2:")
+        trie.delete('abgl$')
+        trie.list()
+        print("Delete #3:")
+        trie.delete('abcd$')
+        trie.list()
+
+    def test_ctci_contacts(self):
+
+        trie = gtg.Trie()
+
+        trie.insert('hack$')
+        trie.insert('hackerrank$')
+        self.assertEqual(trie.search_partial('hac'), 2)
+        self.assertEqual(trie.search_partial('hak'), 0)
+        self.assertEqual(trie.search_partial('hack'), 2)
+        self.assertEqual(trie.search_partial('hack$'), 1)
+
