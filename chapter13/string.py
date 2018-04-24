@@ -129,3 +129,78 @@ def longest_common_subsequence(str1:str, str2:str) -> int:
                 mtable[i][j] = max(mtable[i-1][j], mtable[i][j-1])
 
     return mtable
+
+
+class TrieNode():
+    __slots__ = 'children', 'word_end'
+
+    def __init__(self):
+        self.children = {}
+        self.word_end = False
+
+
+class Trie():
+
+    def __init__(self):
+        self._root = TrieNode()
+
+    def insert(self, word):
+        current = self._root
+
+        for c in word:
+            node = current.children.get(c)
+            if node is None:
+                node = TrieNode()
+                current.children[c] = node
+
+            current = node
+
+        # Mark the last one as end of word
+        current.word_end = True
+
+    def search(self, word):
+        current = self._root
+
+        for c in word:
+            node = current.children.get(c)
+            if node is None:
+                return False
+            current = node
+
+        return current.word_end
+
+    def delete(self, word):
+        self._delete(self._root, word, 0)
+
+    def _delete(self, current: TrieNode, word: str, idx: int):
+        """Return True if parent node should delete the mapping."""
+        if idx == len(word):
+            if not current.word_end:
+                return False
+
+            current.word_end = False
+            return len(current.children) == 0
+
+        c = word[idx]
+        node = current.children.get(c)
+        if node is None:
+            return False
+
+        shouldDelete = self._delete(node, word, idx+1)
+
+        if shouldDelete:
+            del current.children[c]
+            return len(current.children) == 0
+
+        return False
+
+    def list(self):
+        self._list(self._root, "")
+
+    def _list(self, current: TrieNode, prefix: str):
+        if current.word_end:
+            print(prefix)
+            # yield prefix
+        else:
+            for k in current.children:
+                self._list(current.children[k], prefix + k)

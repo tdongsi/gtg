@@ -1,6 +1,7 @@
 
 from copy import deepcopy
 
+
 class Vertex:
     """Lightweight vertex structure for graph"""
     __slots__ = "_element"
