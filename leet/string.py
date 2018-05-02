@@ -231,7 +231,7 @@ class MedianSortedArrays:
         else:
             first = self._find_k(nums1, nums2, mid)
             second = self._find_k(nums1, nums2, mid - 1)
-            print("%f %f" % (first, second))
+            # print("%f %f" % (first, second))
             return (first + second) / 2
 
     def _find_k(self, nums1, nums2, k):
@@ -256,4 +256,6 @@ class MedianSortedArrays:
             elif nums1[idx2] > nums2[idx1]:
                 return self._find_k(nums1, nums2[idx2 + 1:], k - idx2 - 1)
             else:  # nums1[idx2] == nums2[idx1]
+                if idx1 == 0 and idx2 == 0:
+                    return nums1[idx1]
                 return self._find_k(nums1[idx1:], nums2[idx2:], k - idx1 - idx2)

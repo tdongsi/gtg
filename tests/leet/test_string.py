@@ -76,7 +76,9 @@ class MedianSortedArraysTest(TestCase):
         self.assertEqual(sol.findMedianSortedArrays([1, 2], [3, 4]), 2.5)
         self.assertEqual(sol.findMedianSortedArrays([1, 2], [1, 2]), 1.5)
         self.assertEqual(sol.findMedianSortedArrays([1], [1]), 1.0)
+        # self.assertEqual(sol.findMedianSortedArrays([1, 3], [2, 4]), 2.5)
 
         self.assertEqual(sol._find_k([1, 2], [1, 2], 2), 2)
-        self.assertEqual(sol._find_k([1], [1], 1), 1)
+        self.assertEqual(sol._find_k([1], [1], 0), 1)
+        self.assertEqual(sol._find_k([1, 3], [2, 4], 2), 3)
         pass
