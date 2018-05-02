@@ -213,3 +213,44 @@ class LinkedIn():
                     min_dist = abs(num1-num2)
 
         return min_dist
+
+
+class MedianSortedArrays:
+    """https://leetcode.com/problems/median-of-two-sorted-arrays/description/"""
+
+    def findMedianSortedArrays(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: float
+        """
+        m, n = len(nums1), len(nums2)
+        mid = (m + n) // 2
+        if (m + n) % 2 != 0:
+            return self._find_k(nums1, nums2, mid)
+        else:
+            first = self._find_k(nums1, nums2, mid)
+            second = self._find_k(nums1, nums2, mid - 1)
+            return (first + second) / 2
+
+    def _find_k(self, nums1, nums2, k):
+        if k < 0 or (not nums1 and not nums2):
+            raise ValueError()
+
+        if len(nums1) == 0:
+            return nums2[k]
+        elif len(nums2) == 0:
+            return nums1[k]
+        elif k == 0:
+            if nums1[0] < nums2[0]:
+                return nums1[0]
+            else:
+                return nums2[0]
+        else:
+            mid = k // 2
+            idx1 = min(mid, len(nums1) - 1)
+            idx2 = min(mid, len(nums2) - 1)
+            if nums1[idx1] < nums2[idx2]:
+                return self._find_k(nums1[idx1 + 1:], nums2, k - idx1 - 1)
+            else:
+                return self._find_k(nums1, nums2[idx2 + 1:], k - idx2 - 1)

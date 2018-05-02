@@ -66,3 +66,13 @@ class TestLinkedIn(TestCase):
     def test_min_word_dist(self):
         words = "the quick brown fox quick jumps".split()
         self.assertEqual(LinkedIn.min_word_dist(words, "fox", "quick"), 1)
+
+
+class MedianSortedArraysTest(TestCase):
+
+    def test_cases(self):
+        sol = MedianSortedArrays()
+        self.assertEqual(sol.findMedianSortedArrays([1, 3], [2]), 2.0)
+        self.assertEqual(sol.findMedianSortedArrays([1, 2], [3, 4]), 2.5)
+        self.assertEqual(sol.findMedianSortedArrays([1, 2], [1, 2]), 1.5)
+        pass
