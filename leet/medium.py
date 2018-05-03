@@ -1,4 +1,6 @@
 
+import collections
+
 class MedianSortedArrays:
     """https://leetcode.com/problems/median-of-two-sorted-arrays/description/"""
 
@@ -92,3 +94,39 @@ class LongestConsecutive:
                     max_streak = current_streak
 
         return max_streak
+
+
+class LongestSubstringDistinctChars():
+    """https://www.programcreek.com/2013/02/longest-substring-which-contains-2-unique-characters/"""
+
+    def __init__(self):
+        pass
+
+    def longest_substring(self, mstr, k):
+        if k <= 0:
+            return ""
+
+        max_length = 1
+        max_substr = ""
+
+        for i in range(0, len(mstr)):
+
+            j = i + max_length
+
+            while j <= len(mstr):
+
+                # print(mstr[i:j])
+
+                counter = collections.Counter(mstr[i:j])
+                if len(counter) > k:
+                    break
+
+                max_length += 1
+                max_substr = mstr[i:j]
+                j = i + max_length
+                pass
+
+            if i + max_length > len(mstr):
+                break
+
+        return max_substr
