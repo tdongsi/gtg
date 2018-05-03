@@ -279,7 +279,7 @@ class LongestConsecutive:
         max_streak = 1
 
         for e in nums[1:]:
-            if e == last_e or e == last_e + 1:
+            if e == last_e + 1:
                 last_e = e
                 current_streak += 1
                 if current_streak > max_streak:
