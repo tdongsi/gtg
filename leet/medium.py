@@ -47,8 +47,11 @@ class MedianSortedArrays:
                 return self._find_k(nums1[idx1:], nums2[idx2:], k - idx1 - idx2)
 
 
-class LongestConsecutive:
+class LongestConsecutive():
     """https://leetcode.com/problems/longest-consecutive-sequence/description/"""
+
+    def __init__(self):
+        pass
 
     def longest_consecutive(self, nums):
         if not nums:
@@ -60,11 +63,10 @@ class LongestConsecutive:
         for num in nums_set:
 
             if num-1 not in nums_set:
-                cur = num
                 cur_streak = 1
 
                 while num+1 in nums_set:
-                    cur += 1
+                    num += 1
                     cur_streak += 1
 
                 max_streak = max(max_streak, cur_streak)
@@ -117,7 +119,7 @@ class LongestSubstringDistinctChars():
 
                 # print(mstr[i:j])
 
-                counter = collections.Counter(mstr[i:j])
+                counter = set(mstr[i:j])
                 if len(counter) > k:
                     break
 
