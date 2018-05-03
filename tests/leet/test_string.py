@@ -67,26 +67,3 @@ class TestLinkedIn(TestCase):
         words = "the quick brown fox quick jumps".split()
         self.assertEqual(LinkedIn.min_word_dist(words, "fox", "quick"), 1)
 
-
-class MedianSortedArraysTest(TestCase):
-
-    def test_cases(self):
-        sol = MedianSortedArrays()
-        self.assertEqual(sol.findMedianSortedArrays([1, 3], [2]), 2.0)
-        self.assertEqual(sol.findMedianSortedArrays([1, 2], [3, 4]), 2.5)
-        self.assertEqual(sol.findMedianSortedArrays([1, 2], [1, 2]), 1.5)
-        self.assertEqual(sol.findMedianSortedArrays([1], [1]), 1.0)
-        # self.assertEqual(sol.findMedianSortedArrays([1, 3], [2, 4]), 2.5)
-
-        self.assertEqual(sol._find_k([1, 2], [1, 2], 2), 2)
-        self.assertEqual(sol._find_k([1], [1], 0), 1)
-        self.assertEqual(sol._find_k([1, 3], [2, 4], 2), 3)
-        pass
-
-
-class LongestConsecutiveTest(TestCase):
-
-    def test_cases(self):
-        sol = LongestConsecutive()
-        self.assertEqual(sol.longest_consecutive([100, 4, 200, 1, 3, 2]), 4)
-        pass
