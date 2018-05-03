@@ -63,6 +63,7 @@ class TestSelection(unittest.TestCase):
 
         mlist = [1, 2, 0, 3]
         self.assertEqual(anki.sort.quick_select(mlist, 2), 2)
+        self.assertEqual(anki.sort.quick_select(mlist, 0), 0)
 
 
 class TestBinarySearch(unittest.TestCase):

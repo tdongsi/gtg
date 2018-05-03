@@ -82,3 +82,11 @@ class MedianSortedArraysTest(TestCase):
         self.assertEqual(sol._find_k([1], [1], 0), 1)
         self.assertEqual(sol._find_k([1, 3], [2, 4], 2), 3)
         pass
+
+
+class LongestConsecutiveTest(TestCase):
+
+    def test_cases(self):
+        sol = LongestConsecutive()
+        self.assertEqual(sol.longest_consecutive([100, 4, 200, 1, 3, 2]), 4)
+        pass

@@ -259,3 +259,30 @@ class MedianSortedArrays:
                 if idx1 == 0 and idx2 == 0:
                     return nums1[idx1]
                 return self._find_k(nums1[idx1:], nums2[idx2:], k - idx1 - idx2)
+
+
+class LongestConsecutive:
+    """https://leetcode.com/problems/longest-consecutive-sequence/description/"""
+
+    def longest_consecutive(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        if not nums:
+            return 0
+
+        # NOTE: radix sort can be used instead.
+        nums.sort()
+        current_streak = 1
+        last_e = nums[0]
+        max_streak = 1
+
+        for e in nums[1:]:
+            if e == last_e or e == last_e + 1:
+                last_e = e
+                current_streak += 1
+                if current_streak > max_streak:
+                    max_streak = current_streak
+
+        return max_streak
