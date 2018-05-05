@@ -217,10 +217,12 @@ class LinkedIn():
     @staticmethod
     def union(a: list, b: list):
 
-        if a is None:
-            return b
+        if a is None and b is None:
+            return None
+        elif a is None:
+            return set(b)
         elif b is None:
-            return a
+            return set(a)
 
         idx1, idx2 = 0, 0
         m, n = len(a), len(b)
@@ -238,7 +240,7 @@ class LinkedIn():
         output.extend(a[idx1:])
         output.extend(b[idx2:])
 
-        return output
+        return set(output)
 
     @staticmethod
     def intersect(a: list, b: list):

@@ -69,17 +69,17 @@ class TestLinkedIn(TestCase):
 
     def test_union(self):
         self.assertEqual(LinkedIn.union(None, None), None)
-        self.assertEqual(LinkedIn.union(None, [1]), [1])
-        self.assertEqual(LinkedIn.union([1], None), [1])
+        self.assertEqual(LinkedIn.union(None, [1]), set([1]))
+        self.assertEqual(LinkedIn.union([1], None), set([1]))
 
-        self.assertEqual(LinkedIn.union([], []), [])
-        self.assertEqual(LinkedIn.union([], [1]), [1])
-        self.assertEqual(LinkedIn.union([1], []), [1])
+        self.assertEqual(LinkedIn.union([], []), set())
+        self.assertEqual(LinkedIn.union([], [1]), set([1]))
+        self.assertEqual(LinkedIn.union([1], []), set([1]))
 
-        self.assertEqual(LinkedIn.union([1, 2], [3, 4]), [1, 2, 3, 4])
+        self.assertEqual(LinkedIn.union([1, 2], [3, 4]), set([1, 2, 3, 4]))
 
-        self.assertEqual(LinkedIn.union([1, 2], [1, 2]), [1, 1, 2, 2])
-        # self.assertEqual(LinkedIn.union([1, 1, 2], [2, 2, 3]), [1, 2, 3])
+        self.assertEqual(LinkedIn.union([1, 2], [1, 2]), set([1, 2]))
+        self.assertEqual(LinkedIn.union([1, 1, 2], [2, 2, 3]), set([1, 2, 3]))
 
         a = [int(e) for e in "1 3 3 4 5 5 8".split()]
         b = [int(e) for e in "3 4 7 7 8".split()]
