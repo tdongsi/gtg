@@ -214,4 +214,50 @@ class LinkedIn():
 
         return min_dist
 
+    @staticmethod
+    def union(a: list, b: list):
+
+        if a is None:
+            return b
+        elif b is None:
+            return a
+
+        idx1, idx2 = 0, 0
+        m, n = len(a), len(b)
+        output = []
+
+        while idx1 < m and idx2 < n:
+            if a[idx1] < b[idx2]:
+                output.append(a[idx1])
+                idx1 += 1
+            else:
+                output.append(b[idx2])
+                idx2 += 1
+
+        # Either idx1 == len(a) or idx2 == len(b)
+        output.extend(a[idx1:])
+        output.extend(b[idx2:])
+
+        return output
+
+    @staticmethod
+    def intersect(a: list, b: list):
+
+        idx1, idx2 = 0, 0
+        m, n = len(a), len(b)
+        output = []
+
+        while idx1 < m and idx2 < n:
+            if a[idx1] == b[idx2]:
+                if not output or (output and output[-1] != a[idx1]):
+                    output.append(a[idx1])
+                idx1 += 1
+                idx2 += 1
+            elif a[idx1] < b[idx2]:
+                idx1 += 1
+            else:  # a[idx1] > b[idx2]
+                idx2 += 1
+
+        return output
+
 
