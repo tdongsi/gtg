@@ -17,6 +17,10 @@ RG → RG
 RG ← RG
 
 The robot will never leave the circle.
+
+Complete the function doesCircleExist in the editor below.
+The function must return an array of n strings either YES or NO based on whether the robot is bound within a circle or not,
+in order of test results.
 """
 
 from abc import abstractmethod, ABCMeta
