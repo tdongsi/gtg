@@ -1,3 +1,4 @@
+"""Dynamic Programming."""
 
 import chapter13.string
 
