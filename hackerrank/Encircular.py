@@ -66,13 +66,21 @@ class FaceSouth(RobotState):
         robot.state = FaceWest()
 
 
+class States:
+    """Enum class to avoid creating too many state objects."""
+    NORTH = FaceNorth()
+    SOUTH = FaceSouth()
+    WEST = FaceWest()
+    EAST = FaceEast()
+
+
 class Robot():
 
     def __init__(self):
         self.state = FaceNorth()
         self.x, self.y = 0, 0
 
-    def move(self, command):
+    def do(self, command):
         if command == 'G':
             self.state.go(self)
         elif command == 'L':
@@ -80,3 +88,13 @@ class Robot():
         elif command == 'R':
             self.state.right(self)
 
+    def __str__(self):
+        return "Pos: {} {}. Ori: {}".format(self.x, self.y, self.state)
+
+
+def doesCircleExist(commands):
+    for command in commands:
+        robot = Robot()
+        for c in command:
+            robot.do(c)
+        print(robot)
