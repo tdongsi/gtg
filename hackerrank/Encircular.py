@@ -1,3 +1,23 @@
+"""
+You are working on a computer simulation of a mobile robot.
+The robot moves on an infinite plane, starting from position (0, 0).
+Its movements are described by a command string consisting of one or more of the following three letters:
+
+*  G instructs the robot to move forward one step.
+*  L instructs the robot to turn left.
+*  R instructs the robot to turn right.
+
+The robot performs the instructions in a command sequence in an infinite loop.
+You want to know whether or not there exists some circle such that the robot always moves within the circle and never leaves it.
+
+Consider the commands R and G executed infinitely.  A diagram of the robot's movement looks like:
+
+RG → RG
+↑    ↓
+RG ← RG
+
+The robot will never leave the circle.
+"""
 
 from abc import abstractmethod, ABCMeta
 
