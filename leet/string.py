@@ -292,25 +292,21 @@ def consecutive_OOM(num):
     return count
 
 
-def consecutive_oot(num):
-    """Out of time: cases 9-13"""
+def consecutive(num):
+    """Idea: a + (a+1) + ... + (a+L) == a*(L+1) + L*(L+1)/2 = num
+    The requirement translates to a >= 1 and L >= 1.
+    """
     def _cum_sum(n):
         """Cumulative sum 1 + ... + n"""
         return n*(n+1) // 2
 
-    # Consider all consecutive integers up to num//2 + 1
-    max_ele = num//2 + 1
-
     count = 0
-    i, j = 0, 1
-    while i < max_ele:
-        temp = _cum_sum(j) - _cum_sum(i)
-        if temp == num:
+    L = 1
+    while _cum_sum(L) < num:
+        a, r = divmod(num - _cum_sum(L), (L+1))
+        if r == 0 and a >= 1:
             count += 1
-            j += 1
-        elif temp < num:
-            j += 1
-        else:
-            i += 1
+
+        L += 1
 
     return count
