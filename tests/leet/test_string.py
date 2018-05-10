@@ -85,3 +85,17 @@ class TestLinkedIn(TestCase):
         b = [int(e) for e in "3 4 7 7 8".split()]
         self.assertEqual(LinkedIn.intersect(a, b), [3, 4, 8])
 
+
+class TestAirbnb(TestCase):
+
+    def test_triangle(self):
+        a = [7, 10, 7]
+        b = [2, 3, 4]
+        c = [2, 7, 4]
+
+        res = triangleOrNot(a, b, c)
+        print(res)
+
+    def test_consecutive(self):
+        self.assertEqual(consecutive(15), 3)
+        self.assertEqual(consecutive(10), 1)

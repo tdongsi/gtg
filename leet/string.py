@@ -263,3 +263,49 @@ class LinkedIn():
         return output
 
 
+def triangleOrNot(a, b, c):
+
+    def _triangle_check(x, y, z):
+        check = abs(y-z) < x < y + z
+        return "Yes" if check else "No"
+
+    res = []
+    for e in zip(a, b, c):
+        res.append(_triangle_check(*e))
+
+    return res
+
+
+def consecutive(num):
+    cum_sum = [n*(n+1)//2 for n in range(num//2 + 2)]  # Cumulative sum
+
+    count = 0
+    for i in range(len(cum_sum)-1):
+        for j in range(i+1, len(cum_sum)):
+            temp = cum_sum[j] - cum_sum[i]
+            if temp == num:
+                count += 1
+            elif temp > num:
+                break
+
+    return count
+
+
+def consecutive_out_of_time(num):
+    def _cum_sum(n):
+        """Cumulative sum 1 + ... + n"""
+        return n*(n+1) // 2
+
+    # Consider all consecutive integers up to num//2 + 1
+    max_ele = num//2 + 1
+
+    count = 0
+    for i in range(max_ele):
+        for j in range(i+1, max_ele+1):
+            temp = _cum_sum(j) - _cum_sum(i)
+            if temp == num:
+                count += 1
+            elif temp > num:
+                break
+
+    return count
