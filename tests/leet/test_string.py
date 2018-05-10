@@ -99,3 +99,4 @@ class TestAirbnb(TestCase):
     def test_consecutive(self):
         self.assertEqual(consecutive(15), 3)
         self.assertEqual(consecutive(10), 1)
+        self.assertEqual(consecutive(250), 3)

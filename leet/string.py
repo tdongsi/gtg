@@ -276,7 +276,8 @@ def triangleOrNot(a, b, c):
     return res
 
 
-def consecutive(num):
+def consecutive_OOM(num):
+    """Out of memory: cases 9-13"""
     cum_sum = [n*(n+1)//2 for n in range(num//2 + 2)]  # Cumulative sum
 
     count = 0
@@ -291,7 +292,8 @@ def consecutive(num):
     return count
 
 
-def consecutive_out_of_time(num):
+def consecutive(num):
+    """Out of time: cases 9-13"""
     def _cum_sum(n):
         """Cumulative sum 1 + ... + n"""
         return n*(n+1) // 2
