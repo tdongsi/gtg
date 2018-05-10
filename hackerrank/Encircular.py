@@ -17,6 +17,9 @@ class RobotState(metaclass=ABCMeta):
     def right(self, robot):
         pass
 
+    def __str__(self):
+        return self.__class__.__name__
+
 
 class FaceNorth(RobotState):
 
@@ -24,10 +27,10 @@ class FaceNorth(RobotState):
         robot.y += 1
 
     def left(self, robot):
-        robot.state = FaceWest()
+        robot.state = States.WEST
 
     def right(self, robot):
-        robot.state = FaceEast()
+        robot.state = States.EAST
 
 
 class FaceWest(RobotState):
@@ -36,10 +39,10 @@ class FaceWest(RobotState):
         robot.x -= 1
 
     def left(self, robot):
-        robot.state = FaceSouth()
+        robot.state = States.SOUTH
 
     def right(self, robot):
-        robot.state = FaceNorth()
+        robot.state = States.NORTH
 
 
 class FaceEast(RobotState):
@@ -48,10 +51,10 @@ class FaceEast(RobotState):
         robot.x += 1
 
     def left(self, robot):
-        robot.state = FaceNorth()
+        robot.state = States.NORTH
 
     def right(self, robot):
-        robot.state = FaceSouth()
+        robot.state = States.SOUTH
 
 
 class FaceSouth(RobotState):
@@ -60,10 +63,10 @@ class FaceSouth(RobotState):
         robot.y -= 1
 
     def left(self, robot):
-        robot.state = FaceEast()
+        robot.state = States.EAST
 
     def right(self, robot):
-        robot.state = FaceWest()
+        robot.state = States.WEST
 
 
 class States:
@@ -77,7 +80,7 @@ class States:
 class Robot():
 
     def __init__(self):
-        self.state = FaceNorth()
+        self.state = States.NORTH
         self.x, self.y = 0, 0
 
     def do(self, command):
@@ -93,8 +96,16 @@ class Robot():
 
 
 def doesCircleExist(commands):
+    output = []
     for command in commands:
         robot = Robot()
         for c in command:
             robot.do(c)
-        print(robot)
+        # print(robot)
+
+        if robot.state == States.NORTH and not (robot.x == 0 and robot.y == 0):
+            output.append('NO')
+        else:
+            output.append('YES')
+
+    return output
