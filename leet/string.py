@@ -292,7 +292,7 @@ def consecutive_OOM(num):
     return count
 
 
-def consecutive(num):
+def consecutive_oot(num):
     """Out of time: cases 9-13"""
     def _cum_sum(n):
         """Cumulative sum 1 + ... + n"""
@@ -302,12 +302,15 @@ def consecutive(num):
     max_ele = num//2 + 1
 
     count = 0
-    for i in range(max_ele):
-        for j in range(i+1, max_ele+1):
-            temp = _cum_sum(j) - _cum_sum(i)
-            if temp == num:
-                count += 1
-            elif temp > num:
-                break
+    i, j = 0, 1
+    while i < max_ele:
+        temp = _cum_sum(j) - _cum_sum(i)
+        if temp == num:
+            count += 1
+            j += 1
+        elif temp < num:
+            j += 1
+        else:
+            i += 1
 
     return count
