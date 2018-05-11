@@ -40,5 +40,4 @@ class MyTest(unittest.TestCase):
             "2,14,141.8,San Jose"]
 
         my_output = paginate(resultsPerPage, results)
-        print_data(my_output)
         self.assertEqual(my_output, output)

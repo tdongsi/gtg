@@ -1,5 +1,7 @@
 
-from collections import deque, Counter
+from collections import deque, Counter, namedtuple
+
+Row = namedtuple('Row', ['host_id', 'listing_id', 'score', 'city', 'index'])
 
 
 def parse_results(results):
@@ -15,11 +17,10 @@ def parse_results(results):
 
     for idx, e in enumerate(results):
         host_id, listing_id, score, city = e.split(",")
-        # TODO: Use namedtuple for better code
-        data.append((host_id, listing_id, score, city, idx))
+        data.append(Row(host_id, listing_id, score, city, idx))
 
     # Keeping track of unique host ID
-    unique_host = Counter([e[0] for e in data])
+    unique_host = Counter([e.host_id for e in data])
 
     return data, unique_host
 
@@ -53,14 +54,14 @@ def paginate(num, results):
 
         while current and count < num and set_page:
             e = current.popleft()
-            if e[0] in set_page:
+            if e.host_id in set_page:
                 set_page.remove(e[0])
 
                 # Update Counter hostid_set for more efficient set_page.
-                sub = Counter({e[0] : 1})
+                sub = Counter({e.host_id: 1})
                 hostid_set -= sub
 
-                output.append(results[e[-1]])
+                output.append(results[e.index])
                 count += 1
             else:
                 # Put to the next deque
@@ -73,13 +74,14 @@ def paginate(num, results):
             e = next.popleft()
 
             # Update Counter hostid_set for more efficient set_page
-            sub = Counter({e[0] : 1})
+            sub = Counter({e.host_id: 1})
             hostid_set -= sub
 
-            output.append(results[e[-1]])
+            output.append(results[e.index])
             count += 1
 
-        output.append("")
+        if count == num:
+            output.append("")
 
         current = next
         next = deque()
