@@ -24,6 +24,14 @@ def parse_results(results):
     return data, unique_host
 
 
+def print_data(current):
+    print("############")
+    for e in current:
+        print(e)
+    print("############")
+    pass
+
+
 def paginate(num, results):
 
     # corner cases
@@ -39,14 +47,17 @@ def paginate(num, results):
     while current:
         count = 0
         set_page = set(hostid_set.keys())  # Current valid host IDs
+
+        print_data(current)
+        print(set_page)
+
         while current and count < num and set_page:
             e = current.popleft()
             if e[0] in set_page:
                 set_page.remove(e[0])
 
                 # Update Counter hostid_set for more efficient set_page.
-                sub = Counter()
-                sub[e[0]] = 1
+                sub = Counter({e[0] : 1})
                 hostid_set -= sub
 
                 output.append(results[e[-1]])
@@ -62,8 +73,7 @@ def paginate(num, results):
             e = next.popleft()
 
             # Update Counter hostid_set for more efficient set_page
-            sub = Counter()
-            sub[e[0]] = 1
+            sub = Counter({e[0] : 1})
             hostid_set -= sub
 
             output.append(results[e[-1]])
