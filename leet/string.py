@@ -298,7 +298,7 @@ def consecutive(num):
 
 def create_text_from_magazine(text, magazine):
     """
-    Codeless Question: You are given a search string and a magazine.
+    You are given a search string and a magazine.
     You seek to generate all the characters in search string by cutting them out from the magazine.
     Give an algorithm to efficiently determine whether the magazine contains all the letters in the search string.
 
@@ -312,13 +312,11 @@ def create_text_from_magazine(text, magazine):
     del text_count[' ']
 
     lines = magazine.split("\n")
-    mag_count = Counter()
-
     for line in lines:
-        mag_count.update(line.strip().lower())
-        temp = mag_count & text_count
-        print(temp)
-        if temp == text_count:
+        mag_count = Counter(line.strip().lower())
+        text_count -= mag_count
+        # print(text_count)
+        if not text_count:
             return True
 
     return False
