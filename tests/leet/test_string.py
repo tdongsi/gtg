@@ -102,6 +102,14 @@ class TestAirbnb(TestCase):
         self.assertEqual(consecutive(250), 3)
 
     def test_create_text(self):
-        self.assertFalse(create_text_from_magazine("Hello World", "The quick brown fox jumps over the lazy dog"))
+        magazine = """
+        The quick brown
+        fox jumps over
+        the lazy dog
+        """
+        self.assertFalse(create_text_from_magazine("Hello World", magazine))
         self.assertTrue(create_text_from_magazine("Hell", "Hello"))
+
+        # test case where space causes false negative
+        self.assertTrue(create_text_from_magazine("Hell No", "HelloPython"))
 

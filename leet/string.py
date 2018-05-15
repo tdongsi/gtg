@@ -306,4 +306,19 @@ def create_text_from_magazine(text, magazine):
     :param magazine: Where you get characters from.
     :return: True or False
     """
+    from collections import Counter
+
+    text_count = Counter(text.strip().lower())
+    del text_count[' ']
+
+    lines = magazine.split("\n")
+    mag_count = Counter()
+
+    for line in lines:
+        mag_count.update(line.strip().lower())
+        temp = mag_count & text_count
+        print(temp)
+        if temp == text_count:
+            return True
+
     return False
