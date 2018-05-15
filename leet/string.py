@@ -294,3 +294,16 @@ def consecutive(num):
         L += 1
 
     return count
+
+
+def create_text_from_magazine(text, magazine):
+    """
+    Codeless Question: You are given a search string and a magazine.
+    You seek to generate all the characters in search string by cutting them out from the magazine.
+    Give an algorithm to efficiently determine whether the magazine contains all the letters in the search string.
+
+    :param text: Text you want to generate.
+    :param magazine: Where you get characters from.
+    :return: True or False
+    """
+    return False
