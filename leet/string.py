@@ -276,22 +276,6 @@ def triangleOrNot(a, b, c):
     return res
 
 
-def consecutive_OOM(num):
-    """Out of memory: cases 9-13"""
-    cum_sum = [n*(n+1)//2 for n in range(num//2 + 2)]  # Cumulative sum
-
-    count = 0
-    for i in range(len(cum_sum)-1):
-        for j in range(i+1, len(cum_sum)):
-            temp = cum_sum[j] - cum_sum[i]
-            if temp == num:
-                count += 1
-            elif temp > num:
-                break
-
-    return count
-
-
 def consecutive(num):
     """Idea: a + (a+1) + ... + (a+L) == a*(L+1) + L*(L+1)/2 = num
     The requirement translates to a >= 1 and L >= 1.
