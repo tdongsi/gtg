@@ -1,3 +1,7 @@
+"""
+Never get stuck at the same question twice.
+All questions asked in the past will be solved here.
+"""
 
 class Box():
 
@@ -179,7 +183,7 @@ class GoogleWordPuzzle():
         return mydict
 
 
-class FacebookPerms():
+class Facebook():
 
     @staticmethod
     def generate_perms(mlist):
@@ -187,7 +191,7 @@ class FacebookPerms():
         if not mlist or len(mlist) == 1:
             yield mlist
         else:
-            for perm in FacebookPerms.generate_perms(mlist[1:]):
+            for perm in Facebook.generate_perms(mlist[1:]):
                 # NOTE: len(mlist) NOT len(perm)
                 for i in range(len(mlist)):
                     yield perm[:i] + mlist[0:1] + perm[i:]

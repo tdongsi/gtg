@@ -1,7 +1,7 @@
 from unittest import TestCase
 import os
 
-from leet.string import *
+from leet.company import *
 
 
 class TestBox(TestCase):
@@ -56,15 +56,15 @@ class TestFacebook(TestCase):
             # print(perm)
             pass
 
-        perms = FacebookPerms.generate_perms([1, 2, 3, 4])
+        perms = Facebook.generate_perms([1, 2, 3, 4])
         for perm in perms:
             print(perm)
 
         pass
 
     def test_merge_intervals(self):
-        self.assertEqual(FacebookPerms.merge_intervals([[1,3],[2,6],[8,10],[15,18]]), [[1,6],[8,10],[15,18]])
-        self.assertEqual(FacebookPerms.merge_intervals([[1,4],[4,5]], [[1,5]]))
+        self.assertEqual(Facebook.merge_intervals([[1, 3], [2, 6], [8, 10], [15, 18]]), [[1, 6], [8, 10], [15, 18]])
+        self.assertEqual(Facebook.merge_intervals([[1, 4], [4, 5]], [[1, 5]]))
         pass
 
 
