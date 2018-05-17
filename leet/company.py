@@ -203,48 +203,17 @@ class Facebook():
         :param mlol: List of lists
         :return: overlapping intervals.
         """
-        from collections import Counter
-        import itertools
+        mlol.sort(key=lambda x: x[0])
 
         output = []
-
-        counter = Counter(itertools.chain.from_iterable(mlol))
-        # print(counter)
-        keys = list(counter.keys())
-        keys.sort()
-
-        temp = []
         for interval in mlol:
-            temp.append((interval[0], "IN"))
-            temp.append((interval[1], "OUT"))
-        temp.sort()
-
-        idx = 0
-        stack_length = 0
-        in_interval = False
-        for key in keys:
-            for i in range(counter[key]):
-                time, action = temp[idx]
-                idx += 1
-
-                if action == "IN":
-                    stack_length += 1
-                elif action == "OUT":
-                    stack_length -= 1
-
-            if stack_length and in_interval is False:
-                # Net action is entering an interval and not in an interval"
-                output.append([key, key])
-                in_interval = True
-            elif stack_length == 0 and in_interval is True:
-                # Net action is exiting an interval and not in an interval"
-                output[-1][-1] = key
-                in_interval = False
+            # if the output list is empty or if the current interval does not overlap with the previous,
+            # simply append it.
+            if not output or output[-1][1] < interval[0]:
+                output.append(interval)
             else:
-                # Doing nothing if
-                # count > 0 and in_interval is True
-                # count == 0 and in_interval is False (?)
-                pass
+                # otherwise, there is overlap, so we combine the current and previous intervals.
+                output[-1][1] = max(output[-1][1], interval[1])
 
         return output
 
