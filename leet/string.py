@@ -192,6 +192,15 @@ class FacebookPerms():
                 for i in range(len(mlist)):
                     yield perm[:i] + mlist[0:1] + perm[i:]
 
+    @staticmethod
+    def merge_intervals(mlol):
+        """ Given a collection of intervals, merge all overlapping intervals.
+
+        :param mlol: List of lists
+        :return: overlapping intervals.
+        """
+        return None
+
 
 class LinkedIn():
 

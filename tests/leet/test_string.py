@@ -60,6 +60,13 @@ class TestFacebook(TestCase):
         for perm in perms:
             print(perm)
 
+        pass
+
+    def test_merge_intervals(self):
+        self.assertEqual(FacebookPerms.merge_intervals([[1,3],[2,6],[8,10],[15,18]]), [[1,6],[8,10],[15,18]])
+        self.assertEqual(FacebookPerms.merge_intervals([[1,4],[4,5]], [[1,5]]))
+        pass
+
 
 class TestLinkedIn(TestCase):
 
