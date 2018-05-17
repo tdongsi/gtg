@@ -214,37 +214,36 @@ class Facebook():
         keys.sort()
 
         temp = []
-        for idx, interval in enumerate(mlol):
-            temp.append((interval[0], idx, "IN"))
-            temp.append((interval[1], idx, "OUT"))
+        for interval in mlol:
+            temp.append((interval[0], "IN"))
+            temp.append((interval[1], "OUT"))
         temp.sort()
 
         idx = 0
-        stack = []
+        stack_length = 0
         in_interval = False
         for key in keys:
             for i in range(counter[key]):
-                time, index, action = temp[idx]
+                time, action = temp[idx]
                 idx += 1
 
                 if action == "IN":
-                    stack.append(index)
+                    stack_length += 1
                 elif action == "OUT":
-                    stack.remove(index)
+                    stack_length -= 1
 
-            if stack and in_interval is False:
+            if stack_length and in_interval is False:
                 # Net action is entering an interval and not in an interval"
                 output.append([key, key])
                 in_interval = True
-            elif not stack and in_interval is True:
+            elif stack_length == 0 and in_interval is True:
                 # Net action is exiting an interval and not in an interval"
                 output[-1][-1] = key
                 in_interval = False
             else:
                 # Doing nothing if
-                # count == 0
                 # count > 0 and in_interval is True
-                # count < 0 and in_interval is False (?)
+                # count == 0 and in_interval is False (?)
                 pass
 
         return output
