@@ -203,7 +203,51 @@ class Facebook():
         :param mlol: List of lists
         :return: overlapping intervals.
         """
-        return None
+        from collections import Counter
+        import itertools
+
+        output = []
+
+        counter = Counter(itertools.chain.from_iterable(mlol))
+        # print(counter)
+        keys = list(counter.keys())
+        keys.sort()
+
+        temp = []
+        for idx, interval in enumerate(mlol):
+            temp.append((interval[0], idx, "IN"))
+            temp.append((interval[1], idx, "OUT"))
+        temp.sort()
+
+        idx = 0
+        stack = []
+        in_interval = False
+        for key in keys:
+            for i in range(counter[key]):
+                time, index, action = temp[idx]
+                idx += 1
+
+                if action == "IN":
+                    stack.append(index)
+                elif action == "OUT":
+                    stack.remove(index)
+
+            if stack and in_interval is False:
+                # Net action is entering an interval and not in an interval"
+                output.append([key, key])
+                in_interval = True
+            elif not stack and in_interval is True:
+                # Net action is exiting an interval and not in an interval"
+                output[-1][-1] = key
+                in_interval = False
+            else:
+                # Doing nothing if
+                # count == 0
+                # count > 0 and in_interval is True
+                # count < 0 and in_interval is False (?)
+                pass
+
+        return output
 
 
 class LinkedIn():
