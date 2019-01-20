@@ -191,10 +191,12 @@ class Trie():
     def _delete(self, current: TrieNode, word: str, idx: int):
         """Return True if parent node should delete the mapping."""
         if idx == len(word):
+            # Only delete when end of word is reached
             if not current.word_end:
                 return False
 
             current.word_end = False
+            # return True if there is no other mapping
             return len(current.children) == 0
 
         c = word[idx]
@@ -204,8 +206,10 @@ class Trie():
 
         shouldDelete = self._delete(node, word, idx+1)
 
+        # if true, delete the mapping for c and the TrieNode
         if shouldDelete:
             del current.children[c]
+            # return True if there is no other mapping
             return len(current.children) == 0
 
         return False
