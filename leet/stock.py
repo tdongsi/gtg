@@ -53,11 +53,9 @@ def maximum_subarray(nums: list) -> list:
 
         if total - min_val > gap:
             gap = total - min_val
-            end = i
-            start = min_idx
+            start, end = min_idx, i
 
         if total < min_val:
-            min_val = total
-            min_idx = i
+            min_val, min_idx = total, i
 
     return nums[start + 1: end + 1]
