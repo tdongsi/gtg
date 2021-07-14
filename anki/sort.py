@@ -171,19 +171,19 @@ def binary_search(mlist, target):
 def binary_search_iterative(mlist, target):
     if mlist is None:
         return -1
-    else:
-        lo = 0
-        hi = len(mlist)
-        while lo < hi:
-            mid = (lo+hi) // 2
-            if mlist[mid] == target:
-                return mid
-            elif mlist[mid] < target:
-                lo = mid+1
-            else:
-                hi = mid
 
-        return -1
+    lo = 0
+    hi = len(mlist)
+    while lo < hi:
+        mid = (lo+hi) // 2
+        if mlist[mid] == target:
+            return mid
+        elif mlist[mid] < target:
+            lo = mid+1
+        else:
+            hi = mid
+
+    return -1
 
 
 def search_end(mlist, target):
